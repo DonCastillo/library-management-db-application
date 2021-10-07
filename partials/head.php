@@ -24,6 +24,12 @@
                       referrerpolicy="no-referrer"
                 >
 
+                <link rel="stylesheet" 
+                      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+                      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" 
+                      crossorigin="anonymous"
+                >
+
                 <link rel="preconnect" href="https://fonts.googleapis.com">
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Source+Sans+Pro:wght@300;700&display=swap" rel="stylesheet"> 
@@ -33,6 +39,65 @@
                 <title>'.$pageTitle.'</title>
             </head>
             <body>
+            <div class="body-wrapper d-flex">
+            <div class="left menu p-3">
+                <ul>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-bookmark"></i>    
+                            <div>Add an author</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-book"></i>
+                            <div>Add a book</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-user"></i>
+                            <div>Register a borrower</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-file-export"></i>    
+                            <div>Rent a book</div>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="">
+                            <i class="far fa-list-alt"></i>    
+                            <div>List all authors</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="far fa-list-alt"></i>    
+                            <div>List all books</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="far fa-list-alt"></i>    
+                            <div>List all borrowers</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="far fa-list-alt"></i>    
+                            <div>List of unreturned books</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right p-5">
+            ante. Maecenas non est dignissim, sollicitudin urna vitae, sollicitudin est. Suspendisse id tempor lorem, id bibendum nunc. Duis sapien mauris, gravida et egestas at, euismod ut enim. Nulla ultrices et erat at condimentum. Nullam varius ligula lectus, at sagittis mi condimentum sit amet. Ut pretium ornare tortor, at ultricies libero venenatis ac. Vestibulum rhoncus auctor urna, pretium condimentum ipsum cursus vulputate. Nullam nisl nibh, tempor in vestibulum nec, dignissim sed est. Suspendisse nec elit vitae nulla tincidunt placerat. Suspendisse non aliquam justo, vel convallis lorem. Praesent vel augue ipsum. Suspendisse vehicula a lorem id tincidunt. ante. Maecenas non est dignissim, sollicitudin urna vitae, sollicitudin est. Suspendisse id tempor lorem, id bibendum nunc. Duis sapien mauris, gravida et egestas at, euismod ut enim. Nulla ultrices et erat at condimentum. Nullam varius ligula lectus, at sagittis mi condimentum sit amet. Ut pretium ornare tortor, at ultricies libero venenatis ac. Vestibulum rhoncus auctor urna, pretium condimentum ipsum cursus vulputate. Nullam nisl nibh, tempor in vestibulum nec, dignissim sed est. Suspendisse nec elit vitae nulla tincidunt placerat. Suspendisse non aliquam justo, vel convallis lorem. Praesent vel augue ipsum. Suspendisse vehicula a lorem id tincidunt. ante. Maecenas non est dignissim, sollicitudin urna vitae, sollicitudin est. Suspendisse id tempor lorem, id bibendum nunc. Duis sapien mauris, gravida et egestas at, euismod ut enim. Nulla ultrices et erat at condimentum. Nullam varius ligula lectus, at sagittis mi condimentum sit amet. Ut pretium ornare tortor, at ultricies libero venenatis ac. Vestibulum rhoncus auctor urna, pretium condimentum ipsum cursus vulputate. Nullam nisl nibh, tempor in vestibulum nec, dignissim sed est. Suspendisse nec elit vitae nulla tincidunt placerat. Suspendisse non aliquam justo, vel convallis lorem. Praesent vel augue ipsum. Suspendisse vehicula a lorem id tincidunt. ante. Maecenas non est dignissim, sollicitudin urna vitae, sollicitudin est. Suspendisse id tempor lorem, id bibendum nunc. Duis sapien mauris, gravida et egestas at, euismod ut enim. Nulla ultrices et erat at condimentum. Nullam varius ligula lectus, at sagittis mi condimentum sit amet. Ut pretium ornare tortor, at ultricies libero venenatis ac. Vestibulum rhoncus auctor urna, pretium condimentum ipsum cursus vulputate. Nullam nisl nibh, tempor in vestibulum nec, dignissim sed est. Suspendisse nec elit vitae nulla tincidunt placerat. Suspendisse non aliquam justo, vel convallis lorem. Praesent vel augue ipsum. Suspendisse vehicula a lorem id tincidunt. 
+            </div>
         ';
     }
 ?>

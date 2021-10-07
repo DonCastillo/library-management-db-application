@@ -2,9 +2,8 @@
     function Footer()
     {
         echo
-        '   <footer>
-            
-            </footer>
+        '   
+            </div>
             
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
@@ -16,7 +15,7 @@
                     integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" 
                     crossorigin="anonymous">
             </script>
-            
+
             <script src="js/site.js"></script>
 
             </body>
