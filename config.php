@@ -4,7 +4,7 @@
 $DB_HOST = 'localhost';
 $DB_USER = 'root';
 $DB_PASS = 'sql29059';
-$DB_NAME = 'library_management';
+$DB_NAME = 'library';
 
 $APP_NAME = 'Library Management Application';
 $APP_LOGO = '';
