@@ -121,8 +121,10 @@ CREATE TABLE RENTAL(
 
 
 # experiments
--- select distinct book.id, book.title, book.pubYear, author.fName, author.lName
--- from book left join writes
--- on book.id = writes.bookID
--- left join author
--- on author.id = writes.authorID
+select distinct book.id, book.title, book.pubYear, author.fName, author.lName
+from book left join writes
+on book.id = writes.bookID
+left join author
+on author.id = writes.authorID;
+
+select * from borrower;
