@@ -1,12 +1,12 @@
 <?php
 
-    include './config.php';
-    include './head.php';
-    include './footer.php';
+    include '../config.php';
+    include '../head.php';
+    include '../footer.php';
 
     $head = new Head();
     $head->setTitle('Home');
-    $head->addStyle('./css/styles.css');
+    $head->addStyle('../css/styles.css');
     $head->drawHead();
     $head->drawMenu();
    
@@ -22,6 +22,6 @@
     ';
 
     $footer = new Footer();
-    $footer->addScript('./js/site.js');
+    $footer->addScript('../js/site.js');
     $footer->drawFooter();
 ?>
