@@ -45,13 +45,13 @@
                         <div class="left menu p-3">
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="../create/author.php">
                                             <i class="fas fa-bookmark"></i>    
                                             <div>Add an author</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="../create/book.php">
                                             <i class="fas fa-book"></i>
                                             <div>Add a book</div>
                                         </a>
@@ -72,25 +72,25 @@
 
                                 <ul>
                                     <li>
-                                        <a href="list/authors.php">
+                                        <a href="../list/authors.php">
                                             <i class="far fa-list-alt"></i>    
                                             <div>List all authors</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="list/books.php">
+                                        <a href="../list/books.php">
                                             <i class="far fa-list-alt"></i>    
                                             <div>List all books</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="list/borrowers.php">
+                                        <a href="../list/borrowers.php">
                                             <i class="far fa-list-alt"></i>    
                                             <div>List all borrowers</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="list/unreturnedbooks.php">
+                                        <a href="../list/unreturnedbooks.php">
                                             <i class="far fa-list-alt"></i>    
                                             <div>List of unreturned books</div>
                                         </a>

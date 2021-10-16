@@ -126,5 +126,6 @@ from book left join writes
 on book.id = writes.bookID
 left join author
 on author.id = writes.authorID;
+group by book.id
 
 select * from borrower;

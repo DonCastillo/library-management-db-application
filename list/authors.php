@@ -54,8 +54,6 @@
                 <a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="/"><i class="fas fa-edit"></i></a>
                 <a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="/"><i class="fas fa-trash-alt"></i></a>
             </td>'; 
-            //echo '<td class="col-1"><a href="/"><i class="fas fa-edit"></i></a></td>'; 
-            //echo '<td class="col-1"><a href="/"><i class="fas fa-trash-alt"></i></a></td>'; 
             echo '</tr>';
         }
 

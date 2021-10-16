@@ -27,4 +27,30 @@ $(document).ready(function () {
        
 
     }
+
+    // $('.addfield').click(function(){
+    //     console.log('hello')
+    //     let row = $(this).parent();
+    //     let container = $(this).parent().parent();
+    //     container.append(row.clone());
+    // });
+
+    // function addField(this) {
+    //     console.log(this)
+    // }
+
 });
+
+function addField(event) {
+    let row = $(event).parent();
+    let container = $(event).parent().parent();
+    container.append(row.clone());
+}
+
+function removeField(event) {
+    let numRows = $(event).parent().parent().children();
+    //console.log(numRows)
+    if (numRows.length > 1) {
+        $(event).parent().remove();
+    }
+}
