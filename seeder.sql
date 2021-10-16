@@ -19,6 +19,7 @@ CREATE TABLE AUTHOR(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     fName VARCHAR(35),
     lName VARCHAR(45) NOT NULL,
+    UNIQUE (fName, lName),
     PRIMARY KEY (id)
 );
 
