@@ -19,15 +19,33 @@
 
         <?php
 
+            if ($conn->connect_errno) 
+            {
+                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                exit;
+            }
+
             if ($_POST['lName']) 
             {
                 $sql = "INSERT INTO author (fName, lName) VALUES ('$_POST[fName]', '$_POST[lName]')";
                 $result = $conn->query($sql);
-                echo $result;
+
+                if($result)
+                {
+                    echo '<div class="bg-success text-white p-3">Author added.</div>';
+                }
+                else
+                {
+                    $err = $conn->errno;
+                    if ($err == 1062)
+                    {
+                        echo '<div class="bg-danger text-white p-3">An author with the same first name and last name already exists.</div>';
+                    }
+                }
             } 
             else 
             {
-                echo 'Bye';
+                echo '<div class="bg-danger text-white p-3">A required data is needed.</div>';
             }
         ?>
 

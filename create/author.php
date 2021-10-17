@@ -18,11 +18,11 @@
         <form action="../insert/author.php" method="post">
             <div class="form-group mb-4">
                 <label for="fName" class="mb-2">First Name</label>
-                <input type="text" class="form-control" id="fName" name="fName" placeholder="John">
+                <input type="text" class="form-control" id="fName" name="fName" placeholder="John" maxlength="35">
             </div>
             <div class="form-group mb-4">
                 <label for="lName" class="mb-2">Last Name</label>
-                <input type="text" class="form-control" id="lName" name="lName" placeholder="Smith">
+                <input type="text" class="form-control" id="lName" name="lName" placeholder="Smith" maxlength="45" required>
             </div>
              <div class="form-group mb-4">
                 <input type="submit" class="form-control btn btn-primary" value="Save">
