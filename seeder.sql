@@ -116,17 +116,3 @@ CREATE TABLE RENTAL(
     dueDate DATE,
     PRIMARY KEY (id)
 );
-
-
-
-
-
-# experiments
-select distinct book.id, book.title, book.pubYear, author.fName, author.lName
-from book left join writes
-on book.id = writes.bookID
-left join author
-on author.id = writes.authorID;
-group by book.id
-
-select * from borrower;
