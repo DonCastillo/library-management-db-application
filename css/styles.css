@@ -35,7 +35,7 @@ table i {
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: soft-light;
-    position: fixed;    
+    position: fixed;
     height: 100%;
 }
 .right {
@@ -91,7 +91,13 @@ main {
     width: 100%;
     background: white;
     min-height: 550px;
-    border-radius: 8px; 
+    border-radius: 8px;
     padding: 20px;
     /* font-family: 'Roboto', sans-serif; */
+}
+
+/* Add Asterisk into a <label></label> */
+.required:after {
+  content:"*";
+  color:red;
 }
