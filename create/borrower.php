@@ -42,7 +42,8 @@
             </div>
             <div class="form-group mb-4">
                 <label for="prov" class="mb-2">Province</label>
-                <select class="form-control form-control-sm" id="prov" name="prov">
+                <select class="form-select" id="prov" name="prov">
+                  <option value="" selected></option>
                   <option value="NL">NL</option>
                   <option value="PE">PE</option>
                   <option value="NS">NS</option>
