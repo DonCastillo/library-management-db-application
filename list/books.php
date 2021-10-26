@@ -24,7 +24,8 @@
                 exit;
             }
 
-            $sql = 'SELECT book.title,
+            $sql = 'SELECT book.id,
+                           book.title,
                            GROUP_CONCAT(CONCAT(author.fName," ",author.lName)) AS authorNames,
                            book.pubYear,
                            book.amount
@@ -63,7 +64,7 @@
                     echo '<td class="col-2">'.$row['pubYear'].'</td>'; 
                     echo '<td class="col-2">'.$row['amount'].'</td>'; 
                     echo '<td class="col-2">';
-                    echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="/"><i class="fas fa-eye"></i>';
+                    echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/book.php/?id='.$row['id'].'"><i class="fas fa-eye"></i>';
                     echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="/"><i class="fas fa-edit"></i></a>';
                     echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="/"><i class="fas fa-trash-alt"></i></a>';
                     echo '</td>'; 
