@@ -15,6 +15,10 @@ DROP TABLE IF EXISTS BORROWER;
 DROP TABLE IF EXISTS RENTAL;
 
 # create tables
+
+#-----------------------------
+# AUTHOR
+#-----------------------------
 CREATE TABLE AUTHOR(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     fName VARCHAR(35),
@@ -44,7 +48,14 @@ INSERT INTO AUTHOR VALUES
 (18, 'Khaled', 'Hosseini'),
 (19, 'John', 'Green'),
 (20, 'Cormac', 'McCarthy');
+#-----------------------------
+# AUTHOR
+#-----------------------------
 
+
+#-----------------------------
+# BOOK
+#-----------------------------
 CREATE TABLE BOOK(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
@@ -65,8 +76,14 @@ INSERT INTO BOOK VALUES
 (9, 'The Girl With the Dragon Tattoo', 2005, 1),
 (10, 'The Girl Who Kicked the Hornet\'s Nest', 2006, 1),
 (11, 'The Girl Who Played With Fire', 2007, 1);
+#-----------------------------
+# BOOK
+#-----------------------------
 
 
+#-----------------------------
+# WRITES
+#-----------------------------
 CREATE TABLE WRITES(
     authorID INT UNSIGNED NOT NULL,
     bookID INT UNSIGNED NOT NULL,
@@ -87,9 +104,67 @@ INSERT INTO WRITES VALUES
 (7, 9),
 (7, 10),
 (7, 11);
+#-----------------------------
+# WRITES
+#-----------------------------
 
 
+#-----------------------------
+# GENRE
+#-----------------------------
+CREATE TABLE GENRE(
+    name VARCHAR(35) NOT NULL,
+    PRIMARY KEY (name)
+);
 
+INSERT INTO GENRE VALUES
+('fantasy'),
+('crime'),
+('biography'),
+('young adult'),
+('science fiction'),
+('romance'),
+('horror'),
+('mystery'),
+('thriller');
+#-----------------------------
+# GENRE
+#-----------------------------
+
+
+#-----------------------------
+# ASSIGNS
+#-----------------------------
+CREATE TABLE ASSIGNS(
+    genreName VARCHAR(35) NOT NULL,
+    bookID INT UNSIGNED NOT NULL,
+    FOREIGN KEY (genreName) REFERENCES GENRE(name),
+    FOREIGN KEY (bookID) REFERENCES BOOK(id),
+    PRIMARY KEY (genreName, bookID)
+);
+
+INSERT INTO ASSIGNS VALUES
+('fantasy', 1),
+('fantasy', 2),
+('romance', 3),
+('mystery', 4),
+('thriller', 4),
+('mystery', 5),
+('thriller', 5),
+('mystery', 6),
+('thriller', 6),
+('fantasy', 7),
+('crime', 8),
+('horror', 9),
+('fantasy', 9);
+#-----------------------------
+# ASSIGNS
+#-----------------------------
+
+
+#-----------------------------
+# BORROWER
+#-----------------------------
 CREATE TABLE BORROWER(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     fName VARCHAR(35),
@@ -107,7 +182,14 @@ INSERT INTO BORROWER VALUES
 (1, 'Michael', 'Scott', 'michael.scott@dunder.ca', '123-4567', '123', 'Lethbridge', 'AB', 'A1B2C3'),
 (2, 'Dwight', 'Schrute', 'dwight.shrute@dunder.ca', '456-4444', 'Unit 3, 45 St.', 'Lethbridge', 'AB', '122ABB'),
 (3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG');
+#-----------------------------
+# BORROWER
+#-----------------------------
 
+
+#-----------------------------
+# RENTAL
+#-----------------------------
 CREATE TABLE RENTAL(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     bookID INT UNSIGNED NOT NULL,
@@ -116,3 +198,6 @@ CREATE TABLE RENTAL(
     dueDate DATE,
     PRIMARY KEY (id)
 );
+#-----------------------------
+# RENTAL
+#-----------------------------
