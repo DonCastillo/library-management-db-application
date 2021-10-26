@@ -30,26 +30,38 @@
                 try 
                 {
                     $sql = "INSERT INTO book (title, pubYear, amount) 
-                    VALUES ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
+                            VALUES ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
 
                     $result = $conn->query($sql);
                     $newBookID = $conn->insert_id; // id of the new book just inserted
 
                     $authors = [];
+                    $genres = [];
 
                     // get all authors id from the $_POST['authors']
-                    foreach ($_POST['authors'] as $author)
-                    {
+                    foreach ($_POST['authors'] as $author) {
                         array_push($authors, $author);
                     }
 
-                    // remove duplicate author ids
-                    $authors = array_unique($authors);
+                    // get all genres name from the $_POST['genres']
+                    foreach ($_POST['genres'] as $genre) {
+                        array_push($genres, $genre);
+                    }
 
-                    foreach ($authors as $author)
-                    {
+                    // remove duplicates
+                    $authors = array_unique($authors);
+                    $genres = array_unique($genres);
+
+                    foreach ($authors as $author) {
                         $sql = "INSERT INTO writes (bookID, authorID) VALUES ($newBookID, $author)";
                         $conn->query($sql);
+                    }
+
+                    foreach ($genres as $genre) {
+                        $sql = "INSERT INTO assigns (genreName, bookID) VALUES ('$genre', $newBookID)";
+                        // var_dump($sql);
+                        $conn->query($sql);
+                        // var_dump($conn);
                     }
 
                     echo '<div class="bg-success text-white p-3">Book added.</div>';

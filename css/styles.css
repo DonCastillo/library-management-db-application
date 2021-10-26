@@ -17,6 +17,12 @@ table i {
     justify-content: center;
     align-items: center;
 }
+/* select.form-control {
+    width:unset;
+}
+select.col-8 {
+    width: 66.66666667%;
+} */
 .addfield {
     width: 50px;
     margin-left: 20px;
@@ -100,4 +106,12 @@ main {
 .required:after {
   content:"*";
   color:red;
+}
+
+.multiple-select select {
+    width:auto;
+}
+
+.multiple-select.form-group {
+    background-color:whitesmoke;
 }

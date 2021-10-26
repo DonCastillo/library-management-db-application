@@ -16,11 +16,16 @@
         <hr>
 
         <form action="../insert/book.php" method="post">
+
+            <!--title-->
             <div class="form-group mb-4">
                 <label for="title" class="mb-2">Book Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Alice in Wonderland" maxlength=100 required>
             </div>
-            <div class="form-group mb-4">
+            <!--title-->
+
+            <!--author-->
+            <div class="form-group mb-4 p-4 multiple-select">
                 <label for="title" class="mb-2">Add author</label>
                 <div class="container-fluid">
 
@@ -35,7 +40,7 @@
                         else 
                         {
                             echo '<div class="row mt-3 author">';
-                            echo '<select name="authors[]" class="col-8">';
+                            echo '<select name="authors[]" class="form-control flex-grow-1">';
                             echo '<option value="">No author selected</option>';
 
                             while($row = $result->fetch_assoc()) 
@@ -50,22 +55,64 @@
                                 }  
                             }
                             echo '</select>';
-                            echo '<div class="col-2 btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
-                            echo '<div class="col-2 btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
+                            echo '<div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
+                            echo '<div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
                             echo '</div>';
                         }
                     ?>
 
                 </div>
              </div>
+             <!--author-->
+
+             <!--pub year-->
             <div class="form-group mb-4">
                 <label for="pubYear" class="mb-2">Publication Year</label>
                 <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" maxlength="4" min="1500">
             </div>
+             <!--pub year-->
+
+             <!--num copies-->
             <div class="form-group mb-4">
                 <label for="amount" class="mb-2">Number of Copies</label>
                 <input type="number" class="form-control" id="amount" name="amount" placeholder="" maxlength="2" min="0" max="25">
             </div>
+             <!--num copies-->
+
+             <!--genre-->
+            <div class="form-group mb-4 p-4 multiple-select">
+                <label for="genre" class="mb-2">Assign Genre</label>
+                <div class="container-fluid">
+
+                    <?php
+                        $sql = 'SELECT * FROM genre ORDER BY name ASC';
+                        $result = $conn->query($sql);
+                        if (!$result || $result->num_rows < 1) 
+                        { 
+                            echo '<div class="px-2 py-2 bg-light text-dark">No genres found</div>';
+
+                        } 
+                        else 
+                        {
+                            echo '<div class="row mt-3 genre">';
+                            echo '<select name="genres[]" class="form-control flex-grow-1">';
+                            echo '<option value="">No genre selected</option>';
+
+                            while($row = $result->fetch_assoc()) 
+                            {
+                                echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                            }
+                            echo '</select>';
+                            echo '<div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
+                            echo '<div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
+                            echo '</div>';
+                        }
+                    ?>
+
+                </div>
+             </div>
+             <!--genre-->
+
              <div class="form-group mb-4">
                 <input type="submit" class="form-control btn btn-primary" value="Save">
             </div>

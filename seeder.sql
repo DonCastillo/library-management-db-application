@@ -66,15 +66,15 @@ CREATE TABLE BOOK(
 
 INSERT INTO BOOK VALUES
 (1, 'Dark Matter', 2016, 1),
-(2, 'Harry Potter and the Philosopher\'s Stone', 1997, 1),
-(3, 'Harry Potter and the Chamber of Secrets', 1998, 1),
-(4, 'Harry Potter and the Prisoner of Azkaban', 1999, 1),
+(2, 'Harry Potter and the Philosopher\'s Stone', 1997, 4),
+(3, 'Harry Potter and the Chamber of Secrets', 1998, 5),
+(4, 'Harry Potter and the Prisoner of Azkaban', 1999, 3),
 (5, 'Harry Potter and the Goblet of Fire', 2000, 1),
 (6, 'Harry Potter and the Order of the Phoenix', 2003, 1),
 (7, 'Harry Potter and the Half-Blood Prince', 2005, 1),
 (8, 'Harry Potter and the Deathly Hallows', 2007, 1),
 (9, 'The Girl With the Dragon Tattoo', 2005, 1),
-(10, 'The Girl Who Kicked the Hornet\'s Nest', 2006, 1),
+(10, 'The Girl Who Kicked the Hornet\'s Nest', 2006, 9),
 (11, 'The Girl Who Played With Fire', 2007, 1);
 #-----------------------------
 # BOOK
