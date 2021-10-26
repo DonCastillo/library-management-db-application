@@ -64,13 +64,16 @@
                                     </li>
                                     <li>
                                         <a href="">
+                                            <i class="fas fa-dragon"></i>    
+                                            <div>Add a Genre</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
                                             <i class="fas fa-file-export"></i>    
                                             <div>Rent a book</div>
                                         </a>
                                     </li>
-                                </ul>
-
-                                <ul>
                                     <li>
                                         <a href="../list/authors.php">
                                             <i class="far fa-list-alt"></i>    
@@ -87,6 +90,12 @@
                                         <a href="../list/borrowers.php">
                                             <i class="far fa-list-alt"></i>    
                                             <div>List all borrowers</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../list/genres.php">
+                                            <i class="far fa-list-alt"></i>    
+                                            <div>List all genres</div>
                                         </a>
                                     </li>
                                     <li>
