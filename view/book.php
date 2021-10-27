@@ -12,7 +12,7 @@
 
 
 <div class="right p-5">
-    <main>
+    <main id="view-page">
         <h1>View A Book</h1>
         <hr>
 
@@ -29,35 +29,67 @@
             {
                 
                 $id = $_GET['id'];
-                $sql = "SELECT * FROM book where id = $id";
+
+                $bookSql = "SELECT * 
+                            FROM book 
+                            WHERE id = $id";
+
+                $authorSql = "SELECT author.fName, author.lName
+                              FROM writes
+                              JOIN author
+                              WHERE writes.authorID = author.id AND writes.bookID = $id";
+
+                $genreSql = "SELECT genre.name 
+                             FROM assigns 
+                             JOIN genre 
+                             WHERE assigns.genreName = genre.name AND assigns.bookID = $id";
 
 
-                $result = $conn->query($sql);
+                $bookResult = $conn->query($bookSql);
+                $authorResult = $conn->query($authorSql);
+                $genreResult = $conn->query($genreSql);
 
-                // var_dump($result);
  
-                if ($result->num_rows > 0)
+                if ($bookResult->num_rows > 0)
                 {
 
-                    $row = $result->fetch_assoc();
-                    var_dump($row);
-                        
-                    echo '<div class="row my-4">';
-                    echo '<div class="col-12 col-md-2">Title</div>';
-                    echo '<div class="col-12 col-md-10">'.$row['title'].'</div>';
-                    echo '</div>';
+                    $bookRow = $bookResult->fetch_assoc();
 
-                    echo '<div class="row my-4">';
-                    echo '<div class="col-12 col-md-2">Publication Year</div>';
-                    echo '<div class="col-12 col-md-10">'.$row['pubYear'].'</div>';
-                    echo '</div>';
+                    $authors = [];
+                    while($authorRow = $authorResult->fetch_assoc())
+                        array_push($authors, '<span class="badge badge-pill badge-secondary">'.$authorRow['fName'].' '.$authorRow['lName'].'</span>');
 
-                    echo '<div class="row my-4">';
-                    echo '<div class="col-12 col-md-2">Number of Copies</div>';
-                    echo '<div class="col-12 col-md-10">'.$row['amount'].'</div>';
-                    echo '</div>';
-                        
-                    
+                    $genres = [];
+                    while($genreRow = $genreResult->fetch_assoc())
+                        array_push($genres, '<span class="badge badge-pill badge-secondary">'.$genreRow['name'].'</span>');
+
+                    echo '<table class="table table-striped">';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Title</td>';
+                    echo '<td class="col-9">'.$bookRow['title'].'</td>';
+                    echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Publication Year</td>';
+                    echo '<td class="col-9">'.$bookRow['pubYear'].'</td>';
+                    echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Author(s)</td>';
+                    echo '<td class="col-9">'.implode('', $authors).'</td>';
+                    echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Genre(s)</td>';
+                    echo '<td class="col-9">'.implode('', $genres).'</td>';
+                    echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Number of Copies</td>';
+                    echo '<td class="col-9">'.$bookRow['amount'].'</td>';
+                    echo '</tr>';
+                    echo '</table>';
 
                 } 
                 else 

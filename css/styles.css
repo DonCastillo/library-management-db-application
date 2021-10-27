@@ -2,7 +2,7 @@
 font-family: 'Source Sans Pro', sans-serif; */
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    line-height:1rem;
+    line-height:1.65rem;
 }
 a {
     text-decoration: none;
@@ -16,6 +16,14 @@ table i {
     display: flex !important;
     justify-content: center;
     align-items: center;
+}
+.badge {
+    /* background-color: #223855; */
+    font-size:1rem;
+    font-weight:400;
+    margin-right:0.5rem;
+    margin-bottom:10px;
+    padding:10px 15px;
 }
 /* select.form-control {
     width:unset;
@@ -115,4 +123,9 @@ main {
 
 .multiple-select.form-group {
     background-color:whitesmoke;
+}
+
+#view-page .row {
+    padding:1rem;
+    background-color: aqua;
 }
