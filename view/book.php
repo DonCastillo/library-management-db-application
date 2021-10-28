@@ -4,7 +4,7 @@
     include '../footer.php';
 
     $head = new Head();
-    $head->setTitle('Authors');
+    $head->setTitle('View a Book');
     $head->addStyle('../../css/styles.css');
     $head->drawHead();
     $head->drawMenu();
@@ -13,7 +13,7 @@
 
 <div class="right p-5">
     <main id="view-page">
-        <h1>View A Book</h1>
+        <h1>View a Book</h1>
         <hr>
 
         <?php
