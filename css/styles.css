@@ -18,12 +18,12 @@ table i {
     align-items: center;
 }
 .badge {
-    /* background-color: #223855; */
+    background-color: #223855;
     font-size:1rem;
     font-weight:400;
     margin-right:0.5rem;
     margin-bottom:10px;
-    padding:10px 15px;
+    padding:5px 10px;
 }
 /* select.form-control {
     width:unset;

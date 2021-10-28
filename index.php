@@ -16,7 +16,7 @@
     
     <div class="right p-5">
         <main>
-            <h1>Home</h1>
+            <h1>Dashboard</h1>
             <hr>
         </main>
     </div>
@@ -27,5 +27,6 @@
 
     $footer = new Footer();
     $footer->addScript('./js/site.js');
+    $footer->addScript('./js/urlfixhome.js');
     $footer->drawFooter();
 ?>

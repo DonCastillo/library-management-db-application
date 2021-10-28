@@ -30,6 +30,7 @@
                 <div class="container-fluid">
 
                     <?php
+                    
                         $sql = 'SELECT * FROM author ORDER BY lName ASC';
                         $result = $conn->query($sql);
                         if (!$result || $result->num_rows < 1) 
