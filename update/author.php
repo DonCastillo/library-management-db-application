@@ -25,7 +25,7 @@
                 exit;
             }
 
-            if ($_POST['lName']) 
+            if ( isset($_POST['lName']) && $_POST['lName'] ) 
             {
                 $sql = "UPDATE author 
                         SET fName = '$_POST[fName]',
@@ -61,6 +61,5 @@
 <?php
     $footer = new Footer();
     $footer->addScript('../js/site.js');
-    $footer->addScript('../js/urlfix.js');
     $footer->drawFooter();
 ?>

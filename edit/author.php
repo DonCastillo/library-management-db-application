@@ -26,7 +26,7 @@
                 exit;
             }
 
-            if( $_GET['id'] != "" && $_GET['id'] != NULL )
+            if( isset($_GET['id']) && $_GET['id'] )
             {
 
                 $id = $_GET['id'];
@@ -37,7 +37,7 @@
 
                 $authorResult = $conn->query($authorSql);
 
-                if ($authorResult->num_rows > 0)
+                if ($authorResult && $authorResult->num_rows > 0)
                 {
                     $authorRow = $authorResult->fetch_assoc();
                     echo '<form action="../update/author.php" method="post">';
@@ -79,7 +79,6 @@
 <?php
     $footer = new Footer();
     $footer->addScript('../js/site.js');
-    $footer->addScript('../js/urlfix.js');
     $footer->addScript('../js/edit-book.js');
     $footer->drawFooter();
 ?>

@@ -24,8 +24,7 @@
                 exit;
             }
 
-            //var_dump($_GET['id']);
-            if ( $_GET['id'] != "" && $_GET['id'] != NULL )
+            if ( isset($_GET['id']) && $_GET['id'] )
             {
                 
                 $id = $_GET['id'];
@@ -44,7 +43,7 @@
                 $authorResult = $conn->query($authorSql);
 
  
-                if ($authorResult->num_rows > 0)
+                if ($authorResult && $authorResult->num_rows > 0)
                 {
                     $authorRow = $authorResult->fetch_assoc();
 

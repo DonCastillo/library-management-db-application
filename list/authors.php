@@ -53,7 +53,7 @@
                     echo '<td class="col">';
                     echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/author.php?id='.$row['id'].'"><i class="fas fa-eye"></i>';
                     echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="../edit/author.php?id='.$row['id'].'"><i class="fas fa-edit"></i></a>';
-                    echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="/"><i class="fas fa-trash-alt"></i></a>';
+                    echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="../delete/author.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a>';
                     echo '</td>'; 
                     echo '</tr>';
                 }
