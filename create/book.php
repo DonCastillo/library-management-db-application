@@ -33,13 +33,9 @@
                     
                         $sql = 'SELECT * FROM author ORDER BY lName ASC';
                         $result = $conn->query($sql);
-                        if (!$result || $result->num_rows < 1) 
-                        { 
-                            echo '<div class="px-2 py-2 bg-light text-dark">No authors found</div>';
 
-                        } 
-                        else 
-                        {
+                        if ($result && $result->num_rows > 0) 
+                        { 
                             echo '<div class="row mt-3 author">';
                             echo '<select name="authors[]" class="form-control flex-grow-1">';
                             echo '<option value="">No author selected</option>';
@@ -59,6 +55,10 @@
                             echo '<div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
                             echo '<div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
                             echo '</div>';
+                        } 
+                        else 
+                        {
+                            echo '<div class="px-2 py-2 bg-light text-dark">No authors found</div>';
                         }
                     ?>
 
@@ -88,13 +88,9 @@
                     <?php
                         $sql = 'SELECT * FROM genre ORDER BY name ASC';
                         $result = $conn->query($sql);
-                        if (!$result || $result->num_rows < 1) 
-                        { 
-                            echo '<div class="px-2 py-2 bg-light text-dark">No genres found</div>';
 
-                        } 
-                        else 
-                        {
+                        if ($result && $result->num_rows > 0) 
+                        { 
                             echo '<div class="row mt-3 genre">';
                             echo '<select name="genres[]" class="form-control flex-grow-1">';
                             echo '<option value="">No genre selected</option>';
@@ -107,6 +103,10 @@
                             echo '<div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
                             echo '<div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
                             echo '</div>';
+                        } 
+                        else 
+                        {
+                            echo '<div class="px-2 py-2 bg-light text-dark">No genres found</div>';
                         }
                     ?>
 

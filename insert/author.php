@@ -25,7 +25,7 @@
                 exit;
             }
 
-            if ($_POST['lName']) 
+            if ( isset($_POST['lName']) && $_POST['lName'] ) 
             {
                 $sql = "INSERT INTO author (fName, lName) VALUES ('$_POST[fName]', '$_POST[lName]')";
                 $result = $conn->query($sql);

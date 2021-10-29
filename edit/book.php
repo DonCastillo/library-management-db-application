@@ -26,7 +26,7 @@
                 exit;
             }
 
-            if( $_GET['id'] != "" && $_GET['id'] != NULL )
+            if( isset($_GET['id']) && $_GET['id'] )
             {
 
                 $id = $_GET['id'];
@@ -61,7 +61,7 @@
                 $allAuthorsResult = $conn->query($allAuthors);
                 $allGenresResult = $conn->query($allGenres);
 
-                if ($bookResult->num_rows > 0)
+                if ($bookResult && $bookResult->num_rows > 0)
                 {
 
                     $bookRow = $bookResult->fetch_assoc();

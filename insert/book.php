@@ -25,7 +25,7 @@
                 exit;
             }
 
-            if ($_POST['title']) 
+            if ( isset($_POST['title']) && $_POST['title'] ) 
             {
                 try 
                 {
@@ -59,9 +59,7 @@
 
                     foreach ($genres as $genre) {
                         $sql = "INSERT INTO assigns (genreName, bookID) VALUES ('$genre', $newBookID)";
-                        // var_dump($sql);
                         $conn->query($sql);
-                        // var_dump($conn);
                     }
 
                     echo '<div class="bg-success text-white p-3">Book added.</div>';
