@@ -41,6 +41,7 @@
                 {
                     $authorRow = $authorResult->fetch_assoc();
                     echo '<form action="../update/author.php" method="post">';
+                    echo '    <input type="hidden" name="id" value="'.$authorRow['id'].'">';
                     echo '    <div class="form-group mb-4">';
                     echo '        <label for="fName" class="mb-2">First Name</label>';
                     echo '        <input type="text" class="form-control" id="fName" name="fName" placeholder="John" value="'.$authorRow['fName'].'" maxlength="35">';
