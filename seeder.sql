@@ -199,13 +199,23 @@ insert into BORROWER values
 # RENTAL
 #-----------------------------
 create table RENTAL(
-    id int unsigned not null auto_increment,
     bookID int unsigned not null,
     borrowerID int unsigned not null,
-    rentalDate date,
+    rentalDate date not null,
     dueDate date,
-    primary key (id)
+    foreign key (bookID) references BOOK(id)
+        on delete restrict
+        on update cascade,
+    foreign key (borrowerID) references BORROWER(id)
+        on delete restrict
+        on update cascade,
+    primary key (bookID, borrowerID, rentalDate)
 );
+
+insert into RENTAL values
+(1, 1, '2021-10-08', '2021-10-15'),
+(2, 1, '2021-10-08', '2021-10-15'),
+(1, 2, '2021-10-08', '2021-10-15');
 #-----------------------------
 # RENTAL
 #-----------------------------
