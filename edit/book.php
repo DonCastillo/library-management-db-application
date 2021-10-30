@@ -31,29 +31,29 @@
 
                 $id = $_GET['id'];
 
-                $bookSql = "SELECT * 
-                            FROM book 
-                            WHERE id = $id";
+                $bookSql = "select * 
+                            from BOOK 
+                            where id = $id";
 
-                $authorSql = "SELECT author.id, author.fName, author.lName
-                              FROM writes
-                              JOIN author
-                              WHERE writes.authorID = author.id AND writes.bookID = $id
-                              ORDER BY author.lName";
+                $authorSql = "select AUTHOR.id, AUTHOR.fName, AUTHOR.lName
+                              from WRITES
+                              join AUTHOR
+                              where WRITES.authorID = AUTHOR.id and WRITES.bookID = $id
+                              order by AUTHOR.lName";
 
-                $genreSql = "SELECT genre.name 
-                             FROM assigns 
-                             JOIN genre 
-                             WHERE assigns.genreName = genre.name AND assigns.bookID = $id
-                             ORDER BY genre.name";
+                $genreSql = "select GENRE.name 
+                             from ASSIGNS 
+                             join GENRE 
+                             where ASSIGNS.genreName = GENRE.name and ASSIGNS.bookID = $id
+                             order by GENRE.name";
 
-                $allAuthors = "SELECT * 
-                               FROM author 
-                               ORDER BY lName ASC";
+                $allAuthors = "select * 
+                               from AUTHOR 
+                               order by lName asc";
 
-                $allGenres = "SELECT *
-                              FROM genre
-                              ORDER BY name ASC";
+                $allGenres = "select *
+                              from GENRE
+                              order by name asc";
 
                 $bookResult = $conn->query($bookSql);
                 $authorResult = $conn->query($authorSql);
@@ -82,7 +82,8 @@
 
              
 
-                    echo '<form action="../update/book.php" method="post">';
+                    echo '<form action="../../update/book.php" method="post">';
+                    echo '    <input type="hidden" name="id" value="'.$bookRow['id'].'">';
 
                     /** title **********************************************************************************************************************************************************/
                     echo '<div class="form-group mb-4">';
