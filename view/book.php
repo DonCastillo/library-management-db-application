@@ -30,19 +30,19 @@
                 
                 $id = $_GET['id'];
 
-                $bookSql = "SELECT * 
-                            FROM book 
-                            WHERE id = $id";
+                $bookSql = "select * 
+                            from BOOK 
+                            where id = $id";
 
-                $authorSql = "SELECT author.fName, author.lName
-                              FROM writes
-                              JOIN author
-                              WHERE writes.authorID = author.id AND writes.bookID = $id";
+                $authorSql = "select AUTHOR.fName, AUTHOR.lName
+                              from WRITES
+                              join AUTHOR
+                              where WRITES.authorID = AUTHOR.id and WRITES.bookID = $id";
 
-                $genreSql = "SELECT genre.name 
-                             FROM assigns 
-                             JOIN genre 
-                             WHERE assigns.genreName = genre.name AND assigns.bookID = $id";
+                $genreSql = "select GENRE.name 
+                             from ASSIGNS 
+                             join GENRE 
+                             where ASSIGNS.genreName = GENRE.name and ASSIGNS.bookID = $id";
 
 
                 $bookResult = $conn->query($bookSql);
