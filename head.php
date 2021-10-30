@@ -63,19 +63,19 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="../create/borrower.php">
                                             <i class="fas fa-user"></i>
                                             <div>Register a borrower</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="../create/genre.php">
                                             <i class="fas fa-dragon"></i>    
                                             <div>Add a Genre</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="../create/rent.php">
                                             <i class="fas fa-file-export"></i>    
                                             <div>Rent a book</div>
                                         </a>
