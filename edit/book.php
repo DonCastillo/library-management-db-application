@@ -5,7 +5,7 @@
 
     $head = new Head();
     $head->setTitle('Authors');
-    $head->addStyle('../../css/styles.css');
+    $head->addStyle('../css/styles.css');
     $head->drawHead();
     $head->drawMenu();
 ?>
@@ -187,8 +187,7 @@
 
 <?php
     $footer = new Footer();
-    $footer->addScript('../../js/site.js');
-    $footer->addScript('../../js/urlfix.js');
-    $footer->addScript('../../js/edit-book.js');
+    $footer->addScript('../js/site.js');
+    $footer->addScript('../js/edit-book.js');
     $footer->drawFooter();
 ?>
