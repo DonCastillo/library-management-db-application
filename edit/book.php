@@ -82,7 +82,7 @@
 
              
 
-                    echo '<form action="../../update/book.php" method="post">';
+                    echo '<form action="../update/book.php" method="post">';
                     echo '    <input type="hidden" name="id" value="'.$bookRow['id'].'">';
 
                     /** title **********************************************************************************************************************************************************/
