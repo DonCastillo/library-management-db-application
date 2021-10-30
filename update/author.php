@@ -27,10 +27,10 @@
 
             if ( isset($_POST['lName']) && $_POST['lName'] ) 
             {
-                $sql = "UPDATE author 
-                        SET fName = '$_POST[fName]',
+                $sql = "update AUTHOR 
+                        set fName = '$_POST[fName]',
                             lName = '$_POST[lName]'
-                        WHERE id = '$_POST[id]'";
+                        where id = '$_POST[id]'";
 
                 $result = $conn->query($sql);
 
