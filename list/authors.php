@@ -25,7 +25,7 @@
                 exit;
             }
 
-            $sql = 'SELECT id, lName, fName FROM `author` ORDER BY lName ASC';
+            $sql = 'select id, lName, fName from AUTHOR order by lName asc';
             $result = $conn->query($sql);
 
             if (!$result) 
