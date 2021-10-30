@@ -24,17 +24,17 @@
                 exit;
             }
 
-            $sql = 'SELECT book.id,
-                           book.title,
-                           GROUP_CONCAT(CONCAT(author.fName," ",author.lName)) AS authorNames,
-                           book.pubYear,
-                           book.amount
-                    FROM book
-                    LEFT JOIN writes
-                        ON book.id = writes.bookID
-                    LEFT JOIN author
-                        ON writes.authorID = author.id
-                    GROUP BY book.id';
+            $sql = 'select BOOK.id,
+                           BOOK.title,
+                           group_concat(concat(AUTHOR.fName," ",AUTHOR.lName)) as authorNames,
+                           BOOK.pubYear,
+                           BOOK.amount
+                    from BOOK
+                    left join WRITES
+                        on BOOK.id = WRITES.bookID
+                    left join AUTHOR
+                        on WRITES.authorID = AUTHOR.id
+                    group by BOOK.id';
 
             $result = $conn->query($sql);
 
