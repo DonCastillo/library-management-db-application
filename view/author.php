@@ -29,14 +29,14 @@
                 
                 $id = $_GET['id'];
 
-                $authorSql = "SELECT * 
-                              FROM author 
-                              WHERE id = $id";
+                $authorSql = "select * 
+                              from AUTHOR 
+                              where id = $id";
 
-                $bookSql = "SELECT book.title, book.pubYear
-                            FROM writes
-                            JOIN book
-                            WHERE writes.bookID = book.id AND writes.authorID = $id";
+                $bookSql = "select BOOK.title, BOOK.pubYear
+                            from WRITES
+                            join BOOK
+                            where WRITES.bookID = BOOK.id and WRITES.authorID = $id";
 
 
                 $bookResult = $conn->query($bookSql);
