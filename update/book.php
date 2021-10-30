@@ -39,7 +39,7 @@
                             where id = '$_POST[id]'";
 
                 $bookResult = $conn->query($bookSql);
-                
+
 
                 // delete existing records from WRITES and ASSIGNS table related to this book
                 $deleteWritesSql = "delete from WRITES where bookID = '$bookID'";
@@ -47,19 +47,31 @@
                 $conn->query($deleteWritesSql);
                 $conn->query($deleteAssignsSql);
                 
+                $authors = [];
+                $genres = [];
 
-                // insert updated WRITES tuple for this book
-                foreach ( $_POST['authors'] as $authorID )
-                {
-                    $authorSql = "insert into WRITES (authorID, bookID) 
-                                  values ('$authorID', '$bookID')";
+                // get all authors id from the $_POST['authors']
+                foreach ($_POST['authors'] as $author) {
+                    array_push($authors, $author);
+                }
+
+                foreach ($_POST['genres'] as $genre) {
+                    array_push($genres, $genre);
+                }
+
+                // remove duplicates
+                $authors = array_unique($authors);
+                $genres = array_unique($genres);
+
+
+                // insert authors and genres to WRITES and ASSIGNS table
+                foreach ($authors as $author) {
+                    $authorSql = "insert into WRITES (authorID, bookID) values ('$author', '$bookID')";
                     $conn->query($authorSql);
                 }
 
-                foreach ( $_POST['genres'] as $genreName )
-                {
-                    $genreSql = "insert into ASSIGNS (genreName, bookID)
-                                 values ('$genreName', '$bookID')";
+                foreach ($genres as $genre) {
+                    $genreSql = "insert into ASSIGNS (genreName, bookID) values ('$genre', '$bookID')";
                     $conn->query($genreSql);
                 }
 
