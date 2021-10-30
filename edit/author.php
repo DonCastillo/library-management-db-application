@@ -31,9 +31,9 @@
 
                 $id = $_GET['id'];
 
-                $authorSql = "SELECT * 
-                              FROM author 
-                              WHERE id = $id";
+                $authorSql = "select * 
+                              from AUTHOR 
+                              where id = $id";
 
                 $authorResult = $conn->query($authorSql);
 
