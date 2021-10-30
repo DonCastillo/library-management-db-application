@@ -1,33 +1,33 @@
 # drop library_management db if it exists
-DROP DATABASE IF EXISTS library;
+drop database if exists library;
 
 # create library_management db if it exists
-CREATE DATABASE IF NOT EXISTS library;
+create database if not exists library;
 
 # use database
-USE library;
+use library;
 
 # drop all tables
-DROP TABLE IF EXISTS AUTHOR;
-DROP TABLE IF EXISTS BOOK;
-DROP TABLE IF EXISTS WRITES;
-DROP TABLE IF EXISTS BORROWER;
-DROP TABLE IF EXISTS RENTAL;
+drop table if exists AUTHOR;
+drop table if exists BOOK;
+drop table if exists WRITES;
+drop table if exists BORROWER;
+drop table if exists RENTAL;
 
 # create tables
 
 #-----------------------------
 # AUTHOR
 #-----------------------------
-CREATE TABLE AUTHOR(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    fName VARCHAR(35),
-    lName VARCHAR(45) NOT NULL,
-    UNIQUE (fName, lName),
-    PRIMARY KEY (id)
+create table AUTHOR(
+    id int unsigned not null auto_increment,
+    fName varchar(35),
+    lName varchar(45) not null,
+    unique (fName, lName),
+    primary key (id)
 );
 
-INSERT INTO AUTHOR VALUES
+insert into AUTHOR values
 (1, 'J.K.', 'Rowling'),
 (2, 'J.R.R.', 'Tolkien'),
 (3, 'Leo', 'Tolstoy'),
@@ -56,15 +56,15 @@ INSERT INTO AUTHOR VALUES
 #-----------------------------
 # BOOK
 #-----------------------------
-CREATE TABLE BOOK(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    title VARCHAR(100) NOT NULL,
-    pubYear SMALLINT UNSIGNED,
-    amount TINYINT UNSIGNED DEFAULT 0,
-    PRIMARY KEY (id)
+create table BOOK(
+    id int unsigned not null auto_increment,
+    title varchar(100) not null,
+    pubYear smallint unsigned,
+    amount tinyint unsigned default 0,
+    primary key (id)
 );
 
-INSERT INTO BOOK VALUES
+insert into BOOK values
 (1, 'Dark Matter', 2016, 1),
 (2, 'Harry Potter and the Philosopher\'s Stone', 1997, 4),
 (3, 'Harry Potter and the Chamber of Secrets', 1998, 5),
@@ -84,19 +84,19 @@ INSERT INTO BOOK VALUES
 #-----------------------------
 # WRITES
 #-----------------------------
-CREATE TABLE WRITES(
-    authorID INT UNSIGNED NOT NULL,
-    bookID INT UNSIGNED NOT NULL,
-    FOREIGN KEY (authorID) REFERENCES AUTHOR(id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
-    FOREIGN KEY (bookID) REFERENCES BOOK(id) 
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    PRIMARY KEY (authorID, bookID)
+create table WRITES(
+    authorID int unsigned not null,
+    bookID int unsigned not null,
+    foreign key (authorID) references AUTHOR(id) 
+        on delete cascade 
+        on update cascade,
+    foreign key (bookID) references BOOK(id) 
+        on delete cascade
+        on update cascade,
+    primary key (authorID, bookID)
 );
 
-INSERT INTO WRITES VALUES
+insert into WRITES values
 (1, 2),
 (2, 2),
 (1, 3),
@@ -116,12 +116,12 @@ INSERT INTO WRITES VALUES
 #-----------------------------
 # GENRE
 #-----------------------------
-CREATE TABLE GENRE(
-    name VARCHAR(35) NOT NULL,
-    PRIMARY KEY (name)
+create table GENRE(
+    name varchar(35) not null,
+    primary key (name)
 );
 
-INSERT INTO GENRE VALUES
+insert into GENRE values
 ('fantasy'),
 ('crime'),
 ('biography'),
@@ -139,19 +139,19 @@ INSERT INTO GENRE VALUES
 #-----------------------------
 # ASSIGNS
 #-----------------------------
-CREATE TABLE ASSIGNS(
-    genreName VARCHAR(35) NOT NULL,
-    bookID INT UNSIGNED NOT NULL,
-    FOREIGN KEY (genreName) REFERENCES GENRE(name)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY (bookID) REFERENCES BOOK(id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    PRIMARY KEY (genreName, bookID)
+create table ASSIGNS(
+    genreName varchar(35) not null,
+    bookID int unsigned not null,
+    foreign key (genreName) references GENRE(name)
+        on delete cascade
+        on update cascade,
+    foreign key (bookID) references BOOK(id)
+        on delete cascade
+        on update cascade,
+    primary key (genreName, bookID)
 );
 
-INSERT INTO ASSIGNS VALUES
+insert into ASSIGNS values
 ('fantasy', 1),
 ('fantasy', 2),
 ('romance', 3),
@@ -173,20 +173,20 @@ INSERT INTO ASSIGNS VALUES
 #-----------------------------
 # BORROWER
 #-----------------------------
-CREATE TABLE BORROWER(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    fName VARCHAR(35),
-    lName VARCHAR(45) NOT NULL,
-    email VARCHAR(35) NOT NULL,
-    phone VARCHAR(15),
-    street VARCHAR(30),
-    city VARCHAR(30),
-    prov ENUM('NL', 'PE', 'NS', 'NB', 'QC', 'ON', 'MB', 'SK', 'AB', 'BC', 'YT', 'NT', 'NU'),
-    postalCode VARCHAR(10),
-    PRIMARY KEY (id)
+create table BORROWER(
+    id int unsigned not null auto_increment,
+    fName varchar(35),
+    lName varchar(45) not null,
+    email varchar(35) not null,
+    phone varchar(15),
+    street varchar(30),
+    city varchar(30),
+    prov enum('NL', 'PE', 'NS', 'NB', 'QC', 'ON', 'MB', 'SK', 'AB', 'BC', 'YT', 'NT', 'NU'),
+    postalCode varchar(10),
+    primary key (id)
 );
 
-INSERT INTO BORROWER VALUES
+insert into BORROWER values
 (1, 'Michael', 'Scott', 'michael.scott@dunder.ca', '123-4567', '123', 'Lethbridge', 'AB', 'A1B2C3'),
 (2, 'Dwight', 'Schrute', 'dwight.shrute@dunder.ca', '456-4444', 'Unit 3, 45 St.', 'Lethbridge', 'AB', '122ABB'),
 (3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG');
@@ -198,13 +198,13 @@ INSERT INTO BORROWER VALUES
 #-----------------------------
 # RENTAL
 #-----------------------------
-CREATE TABLE RENTAL(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    bookID INT UNSIGNED NOT NULL,
-    borrowerID INT UNSIGNED NOT NULL,
-    rentalDate DATE,
-    dueDate DATE,
-    PRIMARY KEY (id)
+create table RENTAL(
+    id int unsigned not null auto_increment,
+    bookID int unsigned not null,
+    borrowerID int unsigned not null,
+    rentalDate date,
+    dueDate date,
+    primary key (id)
 );
 #-----------------------------
 # RENTAL
