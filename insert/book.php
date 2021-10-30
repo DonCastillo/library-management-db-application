@@ -29,8 +29,8 @@
             {
                 try 
                 {
-                    $sql = "INSERT INTO book (title, pubYear, amount) 
-                            VALUES ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
+                    $sql = "insert into BOOK (title, pubYear, amount) 
+                            values ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
 
                     $result = $conn->query($sql);
                     $newBookID = $conn->insert_id; // id of the new book just inserted
@@ -53,12 +53,12 @@
                     $genres = array_unique($genres);
 
                     foreach ($authors as $author) {
-                        $sql = "INSERT INTO writes (bookID, authorID) VALUES ($newBookID, $author)";
+                        $sql = "insert into WRITES (bookID, authorID) values ($newBookID, $author)";
                         $conn->query($sql);
                     }
 
                     foreach ($genres as $genre) {
-                        $sql = "INSERT INTO assigns (genreName, bookID) VALUES ('$genre', $newBookID)";
+                        $sql = "insert into ASSIGNS (genreName, bookID) values ('$genre', $newBookID)";
                         $conn->query($sql);
                     }
 
