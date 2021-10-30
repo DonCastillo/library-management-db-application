@@ -28,7 +28,7 @@
 
             if ( isset($_GET['id']) && $_GET['id'] ) 
             {
-                $sql = "DELETE FROM author WHERE id = '$_GET[id]'";
+                $sql = "delete from AUTHOR where id = '$_GET[id]'";
                 $result = $conn->query($sql);
                 echo '<div class="bg-warning text-dark p-3">Author deleted.</div>';
             } 
