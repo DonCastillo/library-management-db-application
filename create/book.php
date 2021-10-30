@@ -31,7 +31,7 @@
 
                     <?php
                     
-                        $sql = 'SELECT * FROM author ORDER BY lName ASC';
+                        $sql = 'select * from AUTHOR order by lName asc';
                         $result = $conn->query($sql);
 
                         if ($result && $result->num_rows > 0) 
@@ -86,7 +86,7 @@
                 <div class="container-fluid">
 
                     <?php
-                        $sql = 'SELECT * FROM genre ORDER BY name ASC';
+                        $sql = 'select * from GENRE order by name asc';
                         $result = $conn->query($sql);
 
                         if ($result && $result->num_rows > 0) 
