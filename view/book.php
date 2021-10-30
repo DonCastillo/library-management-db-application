@@ -5,7 +5,7 @@
 
     $head = new Head();
     $head->setTitle('View a Book');
-    $head->addStyle('../../css/styles.css');
+    $head->addStyle('../css/styles.css');
     $head->drawHead();
     $head->drawMenu();
 ?>
@@ -25,7 +25,7 @@
             }
 
             //var_dump($_GET['id']);
-            if ( $_GET['id'] != "" && $_GET['id'] != NULL )
+            if ( isset($_GET['id']) && $_GET['id'] )
             {
                 
                 $id = $_GET['id'];
@@ -113,7 +113,7 @@
 
 <?php
     $footer = new Footer();
-    $footer->addScript('../../js/site.js');
-    $footer->addScript('../../js/urlfix.js');
+    $footer->addScript('../js/site.js');
+    //$footer->addScript('../../js/urlfix.js');
     $footer->drawFooter();
 ?>
