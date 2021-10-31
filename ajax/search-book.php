@@ -67,9 +67,9 @@ if ($searchResult && $searchResult->num_rows > 0)
         // select
         echo '<td class="col">';
             if ($row['amount'] > 0) {
-                echo '<button type="button" class="select-tuple">SELECT</button>';
+                echo '<button type="button" class="select-book-tuple">SELECT</button>';
             } else {
-                echo '<button type="button" class="select-tuple" disabled>SELECT</button>';
+                echo '<button type="button" class="" disabled>SELECT</button>';
             }
         echo '</td>';
         // select

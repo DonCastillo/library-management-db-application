@@ -1,8 +1,31 @@
+
+var rentPage = 2;
+var bookSelected = [];
+
+
+
+
 $(document).ready(function () {
 
+    // load all borrowers and books records
     showBorrowers("")
     showBooks("");
 
+    togglePages();
+
+    // check if the borrower is already selected
+    if ( $('#selected-borrower').children().length > 0 ) {
+        $('#nav-borrower').removeClass('d-none');
+    }
+
+
+
+
+
+
+
+    // console.log('hello')
+    console.log(rentPage);
 
 
 });
@@ -10,24 +33,28 @@ $(document).ready(function () {
 
 function showBorrowers(str)
 {
-    console.log(str);
-
-    //$('#nav-borrower').addClass('d-none')
-
     $.ajax(`../ajax/search-borrower.php?search=${str}`)
         .done(function( data, status, jqXHR ){
+
+            // load borrowers to the selection panel
             $('#borrower-results').html(data);
 
+            // add event listener to the select button
             $('.select-borrower-tuple').on('click', function(event) {
                 let tuple = $(this).parent().parent().children();
+                let name = tuple.eq(1).text() + ' ' + tuple.eq(2).text();
+                let email = tuple.eq(3).text();
+                let phone = tuple.eq(4).text();
+                let address = tuple.eq(5).text() + ' ' + tuple.eq(6).text() + ' ' + tuple.eq(7).text();
+                let postal = tuple.eq(8).text();
                 let selectedBorrower = `
-                <div class="p-3 border border-success">
+                <div class="p-4 border border-success">
                     <div class="close"><i class="fas fa-times"></i></div>
-                    <div>Name: ${tuple.eq(1).text()} ${tuple.eq(2).text()}</div>
-                    <div>Email: ${tuple.eq(3).text()}</div>
-                    <div>Phone: ${tuple.eq(4).text()}</div>
-                    <div>Address: ${tuple.eq(5).text()} ${tuple.eq(6).text()} ${tuple.eq(7).text()}</div>
-                    <div>Postal: ${tuple.eq(8).text()}</div>
+                    <div>${name}</div>
+                    <div>${email}</div>
+                    <div>${phone}</div>
+                    <div>${address}</div>
+                    <div>${postal}</div>
                 </div>`;
                 $('#selected-borrower').html(selectedBorrower);
                 $('#nav-borrower').removeClass('d-none');
@@ -35,13 +62,8 @@ function showBorrowers(str)
                 $('.close').on('click', function(event){
                     $(this).parent().remove();
                     $('#nav-borrower').addClass('d-none');
-
                 });
-
-
             });
-
-
         })
         .fail(function( jqXHR, status, error ){
             console.log('error');
@@ -53,13 +75,65 @@ function showBooks(str)
 {
     $.ajax(`../ajax/search-book.php?search=${str}`)
     .done(function( data, status, jqXHR ){
+
+        // load books to the selection panel
         $('#book-results').html(data);
 
-        
+        // add event listener to the select button
+        $('.select-book-tuple').on('click', function(event) {
+            let tuple = $(this).parent().parent().children();
+            let id = tuple.eq(0).text();
+            let title = tuple.eq(1).text();
+            let year = tuple.eq(3).text();
+            let author = tuple.eq(2).text();
 
+            // to avoid duplicate selections
+            if ( !bookSelected.includes(id) )
+            {
+                bookSelected.push(id);
+                let selectedBook = `
+                <div class="p-4 border border-success position-relative">
+                    <div class="close"><i class="fas fa-times"></i></div>
+                    <div data-book="${id}" class="d-none"></div>
+                    <div>${title} (${year})</div>
+                    <div>by ${author}</div>
+                </div>
+                `;
+                $('#selected-book').append(selectedBook);
+                $('#nav-book').removeClass('d-none');
+                console.log(bookSelected);
+    
+                $('.close').on('click', function(event){
+                    $(this).parent().remove();
+                    $('#nav-borrower').addClass('d-none');
+                });
+            }
+            
+        });
     })
     .fail(function( jqXHR, status, error ){
         console.log('error');
     });
+}
+
+function togglePages()
+{  
+    // activate first page
+    $('[data-page]').addClass('d-none');
+    $(`[data-page=${rentPage}]`).removeClass('d-none');
+    console.log(rentPage);
+}
+
+
+function next()
+{
+    rentPage++;
+    togglePages();
+}
+
+function prev()
+{
+    rentPage--;
+    togglePages();
 }
 
