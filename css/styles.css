@@ -25,6 +25,10 @@ table i {
     margin-bottom:10px;
     padding:5px 10px;
 }
+.ajax-results {
+    height: 400px;
+    overflow-y: auto;
+}
 /* select.form-control {
     width:unset;
 }
@@ -128,4 +132,16 @@ main {
 #view-page .row {
     padding:1rem;
     background-color: aqua;
+}
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding:5px 12px;
+    cursor: pointer;
+}
+.arrow {
+    cursor: pointer;
+    padding:5px 20px;
+    font-size:1.5rem;
 }
