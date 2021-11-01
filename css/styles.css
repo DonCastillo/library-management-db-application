@@ -29,6 +29,9 @@ table i {
     height: 400px;
     overflow-y: auto;
 }
+summary {
+    list-style: none;
+}
 /* select.form-control {
     width:unset;
 }

@@ -1,5 +1,5 @@
 
-var rentPage = 3;
+var rentPage = 1;
 var bookSelected = [];
 
 
@@ -15,18 +15,25 @@ $(document).ready(function () {
 
     // check if the borrower is already selected
     if ( $('#selected-borrower').children().length > 0 ) {
-        $('#nav-borrower').removeClass('d-none');
+        $('#nav-borrower-next').removeClass('d-none');
     }
 
     // check if any book is already selected
     if ( $('#selected-book').children().length > 0 ) {
-        $('#nav-book').removeClass('d-none');
+        $('#nav-book-next').removeClass('d-none');
     }
 
     // set rental date to current date
     let now = moment().format('YYYY-MM-DD')
     $('#rentalDate').attr('value', now);
     changeDueDate(now);
+
+    validateDate()
+
+    // add event listeners to date
+    $('input[type="date"]').on('change', function(){
+        validateDate();
+    });
 
 
 });
@@ -35,7 +42,7 @@ $(document).ready(function () {
 function showBorrowers(str)
 {
     $.ajax(`../ajax/search-borrower.php?search=${str}`)
-        .done(function( data, status, jqXHR ){
+        .done(function( data, status, jqXHR ) {
 
             // load borrowers to the selection panel
             $('#borrower-results').html(data);
@@ -50,8 +57,8 @@ function showBorrowers(str)
                 let address = tuple.eq(5).text() + ' ' + tuple.eq(6).text() + ' ' + tuple.eq(7).text();
                 let postal = tuple.eq(8).text();
                 let selectedBorrower = `
-                <div class="p-4 border border-success">
-                    <div class="close"><i class="fas fa-times"></i></div>
+                <div class="p-4 border border-success" data-borrower="${id}">
+                    <div class="close close-borrower"><i class="fas fa-times"></i></div>
                     <div><strong>ID:</strong> ${id}</div>
                     <div>${name}</div>
                     <div>${email}</div>
@@ -59,12 +66,27 @@ function showBorrowers(str)
                     <div>${address}</div>
                     <div>${postal}</div>
                 </div>`;
-                $('#selected-borrower').html(selectedBorrower);
-                $('#nav-borrower').removeClass('d-none');
+                let selectedBorrowerSummary = `
+                <div class="p-4" data-summary-borrower="${id}">
+                    <div><strong>ID:</strong> ${id}</div>
+                    <div>${name}</div>
+                    <div>${email}</div>
+                    <div>${phone}</div>
+                    <div>${address}</div>
+                    <div>${postal}</div>
+                    <input type="hidden" value="${id}" name="borrowerID">
+                </div>
+                `;
+               
+                $('#selected-borrower').html(selectedBorrower); // individual
+                $('summary > #summary-borrower').html(selectedBorrowerSummary); // summary
+                $('#nav-borrower-next').removeClass('d-none'); 
 
-                $('.close').on('click', function(event){
-                    $(this).parent().remove();
-                    $('#nav-borrower').addClass('d-none');
+                $('.close-borrower').on('click', function(event) {
+                    let removedBorrower = $(this).parent().attr('data-borrower');
+                    $(`[data-borrower="${removedBorrower}"]`).remove();
+                    $(`[data-summary-borrower="${removedBorrower}"]`).remove();
+                    $('#nav-borrower-next').addClass('d-none');
                 });
             });
         })
@@ -77,7 +99,7 @@ function showBorrowers(str)
 function showBooks(str)
 {
     $.ajax(`../ajax/search-book.php?search=${str}`)
-    .done(function( data, status, jqXHR ){
+    .done(function( data, status, jqXHR ) {
 
         // load books to the selection panel
         $('#book-results').html(data);
@@ -95,27 +117,36 @@ function showBooks(str)
             {
                 bookSelected.push(id);
                 let selectedBook = `
-                <div class="p-4 border border-success position-relative">
+                <div class="p-4 border border-success position-relative" data-book="${id}">
                     <div class="close"><i class="fas fa-times"></i></div>
-                    <div data-book="${id}"><strong>ID:</strong> ${id}</div>
+                    <div><strong>ID:</strong> ${id}</div>
                     <div>${title} (${year})</div>
                     <div>by ${author}</div>
                 </div>
                 `;
+
+                let selectedBookSummary = `
+                <div class="p-4" data-summary-book="${id}">
+                    <div><strong>ID:</strong> ${id}</div>
+                    <div>${title} (${year})</div>
+                    <div>by ${author}</div>
+                    <input type="hidden" value="${id}" name="bookID[]">
+                </div>
+                `;
+
                 $('#selected-book').append(selectedBook);
-                $('#nav-book').removeClass('d-none');
+                $('summary > #summary-book').append(selectedBookSummary); // summary
+                $('#nav-book-next').removeClass('d-none');
     
                 $('.close').on('click', function(event){
-                    let removedBook = $(this).parent().find('[data-book]').attr('data-book');
-                    $(this).parent().remove();
- 
+                    let removedBook = $(this).parent().attr('data-book');
+                    $(`[data-book="${removedBook}"]`).remove();
+                    $(`[data-summary-book="${removedBook}"]`).remove();
+
                     bookSelected = bookSelected.filter(id => id != removedBook);
-
                     if (bookSelected.length < 1) {
-                        $('#nav-book').addClass('d-none');
+                        $('#nav-book-next').addClass('d-none');
                     }
-
-
                 });
             }
             
@@ -154,4 +185,45 @@ function changeDueDate(date)
     let dueDate = moment(rentalDate).add(2, 'week').format('YYYY-MM-DD');
     console.log(dueDate);
     $('#dueDate').val(dueDate);
+}
+
+function validateDate()
+{
+    rentDate = $('#rentalDate').val();
+    dueDate = $('#dueDate').val();
+    updateSummaryDates(rentDate, dueDate);
+
+    if (!rentDate) {
+        $('#nav-date-next').addClass('d-none');
+        $('#date-error').text('Specify a rental date.');
+        $('#date-error').removeClass('d-none');
+    }
+    // valid
+    if( moment(rentDate).isBefore(dueDate) ) {
+        $('#nav-date-next').removeClass('d-none');
+        $('#date-error').addClass('d-none');
+    } else {
+        $('#nav-date-next').addClass('d-none');
+        $('#date-error').text('Due date should be at least one day after the rental date.');
+        $('#date-error').removeClass('d-none');
+    }
+
+}
+
+
+function updateSummaryDates(rentDate, dueDate)
+{
+    let rentDateEl = `
+    <div>
+        Starting rent date:<br>
+            <strong>${moment(rentDate).format('LL')}</strong>
+            <br><br>
+        Must return on or before:<br>
+            <strong>${moment(dueDate).format('LL')}</strong>
+        <input type="hidden" value="${rentDate}" name="rentDate">
+        <input type="hidden" value="${dueDate}" name="dueDate">
+    </div>
+    `
+    $('summary > #summary-date').html(rentDateEl)
+
 }

@@ -25,8 +25,8 @@
             </div>
             <div id="borrower-results" class="ajax-results bg-light"></div>
             <div id="selected-borrower" class="my-4 select-box position-relative"></div>
-            <div id="nav-borrower" class="my-4 d-flex justify-content-end d-none">
-                <div class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
+            <div class="my-4 d-flex justify-content-end">
+                <div id="nav-borrower-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
             </div>
         </div>
         <!--borrower-->
@@ -40,15 +40,15 @@
             </div>
             <div id="book-results" class="ajax-results bg-light"></div>
             <div id="selected-book" class="my-4 select-box d-block d-lg-flex justify-content-start flex-wrap"></div>
-            <div id="nav-book" class="my-4 d-flex justify-content-between d-none">
+            <div class="my-4 d-flex justify-content-between">
                 <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>
-                <div class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
+                <div id="nav-book-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
             </div>
         </div>
         <!--book-->
 
         <!--dates-->
-        <div class="mb-4" data-page="3">
+        <div class="mb-4 d-none" data-page="3">
             <h3 class="text-center fw-bold bg-dark text-white mt-3">Dates</h3>
             <div class="form-group mb-4">
                 <label for="rentalDate" class="mb-2">Rental Date</label>
@@ -58,17 +58,36 @@
                 <label for="dueDate" class="mb-2">Due Date</label>
                 <input type="date" class="form-control" name="dueDate" id="dueDate" value="">
             </div>
+            <div id="date-error" class="p-3 text-white bg-danger d-none"></div>
+            <div class="my-4 d-flex justify-content-between">
+                <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>
+                <div id="nav-date-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
+            </div>
         </div>
         <!--dates-->
 
 
-
-        <div class="form-group mb-4 d-none">
-            <input type="submit" class="form-control btn btn-primary" value="Rent">
+        <!--summary-->
+        <div class="mb-4 d-none" data-page="4">
+           
+            <form action="../insert/rent.php" method="post">
+                <h3 class="text-center fw-bold bg-dark text-white mt-3">Summary</h3>
+                <summary>
+                    <h4>Borrower</h4>
+                    <div id="summary-borrower" class="mb-4"></div>
+                    <h4>Books</h4>
+                    <div id="summary-book" class="mb-4"></div>
+                    <h4>Dates</h4>
+                    <div id="summary-date" class="mb-4"></div>
+                </summary>
+                <input type="submit" class="form-control btn btn-primary" value="Rent">
+            </form>
+            <div class="my-4 d-flex justify-content-start">
+                <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>
+            </div>
+            
         </div>
-
-        <form action="../insert/rent.php" method="post">
-        </form>
+        <!--summary-->
   </main>
 </div>
 
