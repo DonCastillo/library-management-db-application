@@ -1,5 +1,5 @@
 
-var rentPage = 2;
+var rentPage = 3;
 var bookSelected = [];
 
 
@@ -18,14 +18,15 @@ $(document).ready(function () {
         $('#nav-borrower').removeClass('d-none');
     }
 
+    // check if any book is already selected
+    if ( $('#selected-book').children().length > 0 ) {
+        $('#nav-book').removeClass('d-none');
+    }
 
-
-
-
-
-
-    // console.log('hello')
-    console.log(rentPage);
+    // set rental date to current date
+    let now = moment().format('YYYY-MM-DD')
+    $('#rentalDate').attr('value', now);
+    changeDueDate(now);
 
 
 });
@@ -42,6 +43,7 @@ function showBorrowers(str)
             // add event listener to the select button
             $('.select-borrower-tuple').on('click', function(event) {
                 let tuple = $(this).parent().parent().children();
+                let id = tuple.eq(0).text()
                 let name = tuple.eq(1).text() + ' ' + tuple.eq(2).text();
                 let email = tuple.eq(3).text();
                 let phone = tuple.eq(4).text();
@@ -50,6 +52,7 @@ function showBorrowers(str)
                 let selectedBorrower = `
                 <div class="p-4 border border-success">
                     <div class="close"><i class="fas fa-times"></i></div>
+                    <div><strong>ID:</strong> ${id}</div>
                     <div>${name}</div>
                     <div>${email}</div>
                     <div>${phone}</div>
@@ -94,18 +97,25 @@ function showBooks(str)
                 let selectedBook = `
                 <div class="p-4 border border-success position-relative">
                     <div class="close"><i class="fas fa-times"></i></div>
-                    <div data-book="${id}" class="d-none"></div>
+                    <div data-book="${id}"><strong>ID:</strong> ${id}</div>
                     <div>${title} (${year})</div>
                     <div>by ${author}</div>
                 </div>
                 `;
                 $('#selected-book').append(selectedBook);
                 $('#nav-book').removeClass('d-none');
-                console.log(bookSelected);
     
                 $('.close').on('click', function(event){
+                    let removedBook = $(this).parent().find('[data-book]').attr('data-book');
                     $(this).parent().remove();
-                    $('#nav-borrower').addClass('d-none');
+ 
+                    bookSelected = bookSelected.filter(id => id != removedBook);
+
+                    if (bookSelected.length < 1) {
+                        $('#nav-book').addClass('d-none');
+                    }
+
+
                 });
             }
             
@@ -137,3 +147,11 @@ function prev()
     togglePages();
 }
 
+function changeDueDate(date)
+{
+    $('#rentalDate').val(date)
+    let rentalDate = date;
+    let dueDate = moment(rentalDate).add(2, 'week').format('YYYY-MM-DD');
+    console.log(dueDate);
+    $('#dueDate').val(dueDate);
+}

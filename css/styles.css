@@ -43,7 +43,10 @@ select.col-8 {
     min-height: 650px;
     background-color: whitesmoke;
 }
-
+.border-success {
+    background-color: #19875459;
+    margin: 3px;
+}
 .left {
     width:350px;
     flex-shrink:0;

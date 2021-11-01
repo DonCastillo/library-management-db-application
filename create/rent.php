@@ -18,7 +18,7 @@
 
         <!--borrower-->
         <div class="mb-4" data-page="1">
-            <h3 class="text-center fw-bold bg-dark text-white">Borrower Identification</h3>
+            <h3 class="text-center fw-bold bg-dark text-white mt-3">Borrower Identification</h3>
             <div class="form-group mb-4">
                 <label for="search-borrowers" class="mb-2">Search by Borrower ID, Last Name, or Email (select only one)</label>
                 <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" onkeyup="showBorrowers(this.value)">
@@ -39,13 +39,28 @@
                 <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" onkeyup="showBooks(this.value)">
             </div>
             <div id="book-results" class="ajax-results bg-light"></div>
-            <div id="selected-book" class="my-4 select-box d-flex justify-content-start flex-wrap"></div>
+            <div id="selected-book" class="my-4 select-box d-block d-lg-flex justify-content-start flex-wrap"></div>
             <div id="nav-book" class="my-4 d-flex justify-content-between d-none">
                 <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>
                 <div class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
             </div>
         </div>
         <!--book-->
+
+        <!--dates-->
+        <div class="mb-4" data-page="3">
+            <h3 class="text-center fw-bold bg-dark text-white mt-3">Dates</h3>
+            <div class="form-group mb-4">
+                <label for="rentalDate" class="mb-2">Rental Date</label>
+                <input type="date" class="form-control" name="rentalDate" id="rentalDate" value="" onchange="changeDueDate(this.value)">
+            </div>
+            <div class="form-group mb-4">
+                <label for="dueDate" class="mb-2">Due Date</label>
+                <input type="date" class="form-control" name="dueDate" id="dueDate" value="">
+            </div>
+        </div>
+        <!--dates-->
+
 
 
         <div class="form-group mb-4 d-none">
