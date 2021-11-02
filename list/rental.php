@@ -18,7 +18,7 @@
         <hr>
 
         <div class="form-group mb-4">
-            <label for="search-unreturned" class="mb-2">Filter Unreturned Books by Borrower ID, Borrower Last Name, or Rental Date</label>
+            <label for="search-unreturned" class="mb-2">Filter Unreturned Books by Borrower ID, Borrower Last Name, or Rental Date (YYYY-MM-DD).</label>
             <input type="text" class="form-control" id="search-unreturned" name="search-unreturned" placeholder="" onkeyup="showRentals(this.value)">
         </div>
         <div id="rental-results" class="ajax-results bg-light"></div>
