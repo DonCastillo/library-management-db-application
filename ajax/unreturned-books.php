@@ -11,7 +11,7 @@ if ($conn->connect_errno) {
 $searchSql = "select RENTAL.borrowerID, RENTAL.bookID, lName, fName, bookID, rentalDate, dueDate 
               from BORROWER 
               join RENTAL 
-              on BORROWER.id = rental.borrowerID 
+              on BORROWER.id = RENTAL.borrowerID 
               order by lName";
 
 if ( $_GET['search'] )
