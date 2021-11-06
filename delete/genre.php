@@ -28,7 +28,7 @@
 
             if ( isset($_GET['name']) && $_GET['name'] )
             {
-                $sql = "delete from Genre where name = '$_GET[name]'";
+                $sql = "delete from GENRE where name = '$_GET[name]'";
                 $result = $conn->query($sql);
                 echo '<div class="bg-warning text-dark p-3">Genre deleted.</div>';
             }
