@@ -14,7 +14,7 @@
 
 <div class="right p-5">
     <main>
-        <h1>Edit an Genre</h1>
+        <h1>Edit a Genre</h1>
         <hr>
 
         <?php
@@ -25,14 +25,14 @@
                 exit;
             }
 
-            if ( isset($_POST['name']) && $_POST['name'] )
+            if ( (isset($_POST['oldGenre']) && $_POST['oldGenre']) && 
+                 (isset($_POST['newGenre']) && $_POST['newGenre']) )
             {
                 $sql = "update GENRE
-                        set name = '$_POST[name]',
-                        where name = '$_POST[name]'";
+                        set name = '$_POST[newGenre]'
+                        where name = '$_POST[oldGenre]'";
 
                 $result = $conn->query($sql);
-
 
                 if($result)
                 {
@@ -43,7 +43,7 @@
                     $err = $conn->errno;
                     if ($err == 1062)
                     {
-                        echo '<div class="bg-danger text-white p-3">An Genre with the same name already exists.</div>';
+                        echo '<div class="bg-danger text-white p-3">An genre with the same name already exists.</div>';
                     }
                 }
             }
