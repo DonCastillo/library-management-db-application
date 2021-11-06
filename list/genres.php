@@ -25,7 +25,7 @@
                 exit;
             }
 
-            $sql = 'select name from GENRE';
+            $sql = 'select name from GENRE order by name asc';
             $result = $conn->query($sql);
 
             if (!$result)
@@ -47,7 +47,7 @@
                 while($row = $result->fetch_assoc())
                 {
                     echo '<tr>';
-                    echo '<td class="col-5">'.$row['name'].'</td>';
+                    echo '<td class="col-10">'.$row['name'].'</td>';
                     echo '<td class="col">';
                     echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/genre.php?name='.$row['name'].'"><i class="fas fa-eye"></i>';
                     echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="../edit/genre.php?name='.$row['name'].'"><i class="fas fa-edit"></i></a>';
