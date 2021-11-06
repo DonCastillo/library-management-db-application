@@ -17,6 +17,9 @@ table i {
     justify-content: center;
     align-items: center;
 }
+.table-striped tr:hover {
+    background: #7580902e !important;
+}
 .badge {
     background-color: #223855;
     font-size:1rem;
