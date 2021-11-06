@@ -15,10 +15,10 @@
         <h1>Add a Genre</h1>
         <hr>
 
-        <form action="../insert/Genre.php" method="post">
+        <form action="../insert/genre.php" method="post">
             <div class="form-group mb-4">
-                <label for="gName" class="mb-2">Name</label>
-                <input type="text" class="form-control" id="gName" name="gName" placeholder="Adventure" maxlength="35">
+                <label for="genre" class="mb-2">Name</label>
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Adventure" maxlength="35" required>
             </div>
              <div class="form-group mb-4">
                 <input type="submit" class="form-control btn btn-primary" value="Save">
