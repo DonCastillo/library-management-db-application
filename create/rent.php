@@ -18,7 +18,7 @@
 
         <!--borrower-->
         <div class="mb-4" data-page="1">
-            <h3 class="text-center fw-bold bg-dark text-white mt-3">Borrower Identification</h3>
+            <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Borrower Identification</h3>
             <div class="form-group mb-4">
                 <label for="search-borrowers" class="mb-2">Search by Borrower ID, Last Name, or Email (select only one)</label>
                 <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" onkeyup="showBorrowers(this.value)">
@@ -34,7 +34,7 @@
 
         <!--book-->
         <div class="mb-4 d-none" data-page="2">
-            <h3 class="text-center fw-bold bg-dark text-white mt-3">Books to Borrow</h3>
+            <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Books to Borrow</h3>
             <div class="form-group mb-4">
                 <label for="search-books" class="mb-2">Search by Book ID or Title</label>
                 <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" onkeyup="showBooks(this.value)">
@@ -51,7 +51,7 @@
 
         <!--dates-->
         <div class="mb-4 d-none" data-page="3">
-            <h3 class="text-center fw-bold bg-dark text-white mt-3">Dates</h3>
+            <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Dates</h3>
             <div class="form-group mb-4">
                 <label for="rentalDate" class="mb-2">Rental Date</label>
                 <input type="date" class="form-control" name="rentalDate" id="rentalDate" value="" onchange="changeDueDate(this.value)">
@@ -73,7 +73,7 @@
         <div class="mb-4 d-none" data-page="4">
            
             <form action="../insert/rent.php" method="post">
-                <h3 class="text-center fw-bold bg-dark text-white mt-3">Summary</h3>
+                <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Summary</h3>
                 <summary>
                     <h4>Borrower</h4>
                     <div id="summary-borrower" class="mb-4"></div>

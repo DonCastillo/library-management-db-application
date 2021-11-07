@@ -13,15 +13,18 @@ $(document).ready(function () {
 
     togglePages();
 
+    toggleBorrowerNext();
+    toggleBookNext();
+
     // check if the borrower is already selected
-    if ( $('#selected-borrower').children().length > 0 ) {
-        $('#nav-borrower-next').removeClass('d-none');
-    }
+    // if ( $('#selected-borrower').children().length > 0 ) {
+    //     $('#nav-borrower-next').removeClass('d-none');
+    // }
 
     // check if any book is already selected
-    if ( $('#selected-book').children().length > 0 ) {
-        $('#nav-book-next').removeClass('d-none');
-    }
+    // if ( $('#selected-book').children().length > 0 ) {
+    //     $('#nav-book-next').removeClass('d-none');
+    // }
 
     // set rental date to current date
     // let now = moment().format('YYYY-MM-DD')
@@ -52,6 +55,30 @@ $(document).ready(function () {
 });
 
 
+/** enable next navigation *******************************************************/
+function toggleBorrowerNext()
+{
+    console.log('HELLO')
+    if ( $('#selected-borrower').children().length > 0 ) {
+        $('#nav-borrower-next').show();
+    } else {
+        $('#nav-borrower-next').hide();
+    }
+}
+
+function toggleBookNext()
+{
+    if ( $('#selected-book').children().length > 0 ) {
+        $('#nav-book-next').show();
+    } else {
+        $('#nav-book-next').hide();
+    }
+}
+/** enable next navigation *******************************************************/
+
+
+
+/** ajax calls *******************************************************************/
 function showBorrowers(str, restrict)
 {
     $.ajax(`../ajax/search-borrower.php?search=${str}&restrict=${restrict}`)
@@ -88,10 +115,11 @@ function showBooks(str, restrict)
         console.log('error');
     });
 }
+/** ajax calls *******************************************************************/
 
 
 
-
+/** restore *******************************************************************/
 function restoreBook (thisRestoreButton)
 {
     let restoredBook = $(thisRestoreButton).parent().detach();
@@ -109,7 +137,7 @@ function restoreBook (thisRestoreButton)
     $('.close-book').on('click', function() {
         closeBook($(this));
     });
-    
+    toggleBookNext();
 }
 
 
@@ -130,9 +158,12 @@ function restoreBorrower (thisRestoreButton)
     $('.close-borrower').on('click', function() {
         closeBorrower($(this));
     });
+    toggleBorrowerNext();
 }
+/** restore *******************************************************************/
 
 
+/** close *******************************************************************/
 function closeBook (thisCloseButton)
 {
     let removedBook = $(thisCloseButton).parent().attr('data-book');
@@ -155,6 +186,7 @@ function closeBook (thisCloseButton)
         $(`[data-book="${removedBook}"]`).remove();
         $(`[data-summary-book="${removedBook}"]`).remove();
     }
+    toggleBookNext();
 }
 
 
@@ -180,11 +212,12 @@ function closeBorrower (thisCloseButton)
         $(`[data-borrower="${removedBorrower}"]`).remove();
         $(`[data-summary-borrower="${removedBorrower}"]`).remove();
     }
-    
-    //$('#nav-borrower-next').addClass('d-none');
+    toggleBorrowerNext();
 }
+/** close *******************************************************************/
 
 
+/** select tuple ************************************************************/
 function selectBorrowerTuple (thisSelectButton)
 {
     let tuple = $(thisSelectButton).parent().parent().children();
@@ -221,7 +254,6 @@ function selectBorrowerTuple (thisSelectButton)
         selectedBorrower, 
         $('summary > #summary-borrower'),
         selectedBorrowerSummary,
-        $('#nav-borrower-next'),
         'data-borrower'
     );
 
@@ -263,7 +295,6 @@ function selectBookTuple (thisSelectButton)
         selectedBook, 
         $('summary > #summary-book'),
         selectedBookSummary,
-        $('#nav-book-next'),
         'data-book'
     );
 
@@ -271,10 +302,12 @@ function selectBookTuple (thisSelectButton)
         closeBook($(this));
     });
 }
+/** select tuple ************************************************************/
 
 
 
-function insertSelected(aContainer, aContent, bContainer, bContent, next, flag)
+
+function insertSelected(aContainer, aContent, bContainer, bContent, flag)
 {
     if (aContainer.children().length > 0) {
         let card = aContainer.find(`[${flag}]`); // get the index of the card
@@ -290,7 +323,13 @@ function insertSelected(aContainer, aContent, bContainer, bContent, next, flag)
     }
     aContainer.html(aContent);
     bContainer.html(bContent);
-    next.removeClass('d-none');
+    
+    if (flag == 'data-book') {
+        toggleBookNext();
+    }
+    if (flag == 'data-borrower') {
+        toggleBorrowerNext();
+    }
 }
 
 

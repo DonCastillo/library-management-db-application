@@ -54,7 +54,7 @@
 
                 /** Borrower ***************************************************/
                 echo '<div class="mb-4" data-page="1">';
-                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3">Borrower Identification</h3>';
+                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Borrower Identification</h3>';
                 echo '    <div class="d-none" data-current-borrower="'.$borrowerRow['id'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-borrowers" class="mb-2">Search by Borrower ID, Last Name, or Email (select only one)</label>';
@@ -76,7 +76,7 @@
                 echo '        </div>';
                 echo '    </div>';
                 echo '    <div class="my-4 d-flex justify-content-end">';
-                echo '        <div id="nav-borrower-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
+                echo '        <div id="nav-borrower-next" class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
                 echo '    </div>';
                 echo '</div> ';
                 /** Borrower ***************************************************/
@@ -84,7 +84,7 @@
 
                 /** Book ***************************************************/
                 echo '<div class="mb-4 d-none" data-page="2">';
-                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3">Book to Borrow</h3>';
+                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Book to Borrow</h3>';
                 echo '    <div class="d-none" data-current-book="'.$bookRow['id'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-books" class="mb-2">Search by Book ID or Title</label>';
@@ -104,7 +104,7 @@
                 echo '    </div>';
                 echo '    <div class="my-4 d-flex justify-content-between">';
                 echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
-                echo '        <div id="nav-book-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
+                echo '        <div id="nav-book-next" class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
                 echo '    </div>';
                 echo '</div>';
                 /** Book ***************************************************/
