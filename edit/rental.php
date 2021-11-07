@@ -39,14 +39,18 @@
                 $borrowerSql = "select * from BORROWER where id = '$borrower'";
                 $bookSql = "select * from BOOK where id = '$book'";
                 $authorSql = "select lName from AUTHOR join WRITES where AUTHOR.id = WRITES.authorID and WRITES.bookID = '$book'";
+                $rentalSql = "select * from RENTAL where bookID = '$book' and borrowerID = '$borrower' and rentalDate = '$rentalDate'";
 
                 $borrowerResult = $conn->query($borrowerSql);
                 $bookResult = $conn->query($bookSql);
                 $authorResult = $conn->query($authorSql);
+                $rentalResult = $conn->query($rentalSql);
 
 
                 $borrowerRow = $borrowerResult->fetch_assoc();
                 $bookRow = $bookResult->fetch_assoc();
+                $rentalRow = $rentalResult->fetch_assoc();
+                
                 $authors = [];
                 while ($authorRow = $authorResult->fetch_assoc()) {
                     array_push($authors, $authorRow['lName']);
@@ -108,6 +112,26 @@
                 echo '    </div>';
                 echo '</div>';
                 /** Book ***************************************************/
+
+                /** Dates ***************************************************/
+                echo '<div class="mb-4 d-none" data-page="3">';
+                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Dates</h3>';
+                echo '    <div class="form-group mb-4">';
+                echo '        <label for="rentalDate" class="mb-2">Rental Date</label>';
+                echo '        <input type="date" class="form-control" name="rentalDate" id="rentalDate" value="'.$rentalRow['rentalDate'].'" onchange="changeDueDate(this.value)">';
+                echo '    </div>';
+                echo '    <div class="form-group mb-4">';
+                echo '        <label for="dueDate" class="mb-2">Due Date</label>';
+                echo '        <input type="date" class="form-control" name="dueDate" id="dueDate" value="'.$rentalRow['dueDate'].'">';
+                echo '    </div>';
+                echo '    <div id="date-error" class="p-3 text-white bg-danger d-none"></div>';
+                echo '    <div class="my-4 d-flex justify-content-between">';
+                echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
+                echo '        <div id="nav-date-next" class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
+                echo '    </div>';
+                echo '</div>';
+                /** Dates ***************************************************/
+
 
                 
                 // $id = $_GET['id'];

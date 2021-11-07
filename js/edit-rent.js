@@ -1,5 +1,5 @@
 
-var rentPage = 1;
+var rentPage = 3;
 var currentBook = $('[data-current-book]').attr('data-current-book');
 var currentBorrower = $('[data-current-borrower]').attr('data-current-borrower');
 
@@ -16,15 +16,7 @@ $(document).ready(function () {
     toggleBorrowerNext();
     toggleBookNext();
 
-    // check if the borrower is already selected
-    // if ( $('#selected-borrower').children().length > 0 ) {
-    //     $('#nav-borrower-next').removeClass('d-none');
-    // }
-
-    // check if any book is already selected
-    // if ( $('#selected-book').children().length > 0 ) {
-    //     $('#nav-book-next').removeClass('d-none');
-    // }
+    validateDate();
 
     // set rental date to current date
     // let now = moment().format('YYYY-MM-DD')
@@ -34,9 +26,9 @@ $(document).ready(function () {
     // validateDate()
 
     // add event listeners to date
-    // $('input[type="date"]').on('change', function(){
-    //     validateDate();
-    // });
+    $('input[type="date"]').on('change', function(){
+        validateDate();
+    });
 
 
     // close buttons
@@ -364,7 +356,7 @@ function prev()
 
 function changeDueDate(date)
 {
-    $('#rentalDate').val(date)
+    $('#rentalDate').val(date);
     let rentalDate = date;
     let dueDate = moment(rentalDate).add(2, 'week').format('YYYY-MM-DD');
     console.log(dueDate);
