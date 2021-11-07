@@ -8,7 +8,7 @@ var bookSelected = [];
 $(document).ready(function () {
 
     // load all borrowers and books records
-    showBorrowers("")
+    showBorrowers("");
     showBooks("");
 
     togglePages();

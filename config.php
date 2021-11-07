@@ -2,8 +2,11 @@
 
 // $DB_HOST = 'vconroy.cs.uleth.ca';
 $DB_HOST = 'localhost';
-$DB_USER = 'user';
+// $DB_USER = 'casd3660';
+$DB_USER = 'root';
+// $DB_PASS = 'db29059';
 $DB_PASS = 'password';
+// $DB_NAME = 'casd3660';
 $DB_NAME = 'library';
 
 $APP_NAME = 'Library Management Application';

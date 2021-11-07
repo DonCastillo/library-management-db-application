@@ -17,7 +17,7 @@ table i {
     justify-content: center;
     align-items: center;
 }
-.table-striped tr:hover {
+.table-striped tbody tr:hover {
     background: #7580902e !important;
 }
 .badge {
@@ -52,6 +52,10 @@ select.col-8 {
 .border-success {
     background-color: #19875459;
     margin: 3px;
+}
+.border-warning {
+    background-color:#ffc10766;
+    margin:3px;
 }
 .left {
     width:350px;
