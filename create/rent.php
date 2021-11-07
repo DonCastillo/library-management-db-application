@@ -24,7 +24,8 @@
                 <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" onkeyup="showBorrowers(this.value)">
             </div>
             <div id="borrower-results" class="ajax-results bg-light"></div>
-            <div id="selected-borrower" class="my-4 select-box position-relative"></div>
+            <h4>SELECTED BORROWER</h4>
+            <div id="selected-borrower" class="my-4 select-box bg-light position-relative"></div>
             <div class="my-4 d-flex justify-content-end">
                 <div id="nav-borrower-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>
             </div>
@@ -39,7 +40,8 @@
                 <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" onkeyup="showBooks(this.value)">
             </div>
             <div id="book-results" class="ajax-results bg-light"></div>
-            <div id="selected-book" class="my-4 select-box d-block d-lg-flex justify-content-start flex-wrap"></div>
+            <h4>SELECTED BOOK(S)</h4>
+            <div id="selected-book" class="my-4 select-box bg-light d-block d-lg-flex justify-content-start flex-wrap"></div>
             <div class="my-4 d-flex justify-content-between">
                 <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>
                 <div id="nav-book-next" class="arrow d-none" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>

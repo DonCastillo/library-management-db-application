@@ -1,13 +1,14 @@
 
 var rentPage = 1;
 var currentBook = $('[data-current-book]').attr('data-current-book');
+var currentBorrower = $('[data-current-borrower]').attr('data-current-borrower');
 
 
 
 $(document).ready(function () {
 
     // load all borrowers and books records
-    showBorrowers( $('#search-borrowers').val() );
+    showBorrowers( "", currentBorrower );
     showBooks( "", currentBook );
 
     togglePages();
@@ -51,9 +52,9 @@ $(document).ready(function () {
 });
 
 
-function showBorrowers(str)
+function showBorrowers(str, restrict)
 {
-    $.ajax(`../ajax/search-borrower.php?search=${str}`)
+    $.ajax(`../ajax/search-borrower.php?search=${str}&restrict=${restrict}`)
         .done(function( data, status, jqXHR ) {
 
             // load borrowers to the selection panel
@@ -112,6 +113,26 @@ function restoreBook (thisRestoreButton)
 }
 
 
+function restoreBorrower (thisRestoreButton)
+{
+    let restoredBorrower = $(thisRestoreButton).parent().detach();
+
+    $('#selected-borrower').html(restoredBorrower);
+    $('#selected-borrower').find('[data-borrower]')
+                       .removeClass('border-warning')
+                       .addClass('border-success');
+    $('#selected-borrower').find('[data-borrower]')
+                       .find('.restore-borrower')
+                       .removeClass('restore-borrower')
+                       .addClass('close-borrower')
+                       .html('<i class="fas fa-times"></i>');
+
+    $('.close-borrower').on('click', function() {
+        closeBorrower($(this));
+    });
+}
+
+
 function closeBook (thisCloseButton)
 {
     let removedBook = $(thisCloseButton).parent().attr('data-book');
@@ -140,9 +161,27 @@ function closeBook (thisCloseButton)
 function closeBorrower (thisCloseButton) 
 {
     let removedBorrower = $(thisCloseButton).parent().attr('data-borrower');
-    $(`[data-borrower="${removedBorrower}"]`).remove();
-    $(`[data-summary-borrower="${removedBorrower}"]`).remove();
-    $('#nav-borrower-next').addClass('d-none');
+    if (removedBorrower == currentBorrower) {
+        let removedCard = $(`[data-borrower="${removedBorrower}"]`).detach();
+        $('#previous-borrower').html(removedCard);
+        $('#previous-borrower').find('[data-borrower]')
+                           .removeClass('border-success')
+                           .addClass('border-warning');
+        $('#previous-borrower').find('[data-borrower]')
+                           .find('.close-borrower')
+                           .removeClass('close-borrower')
+                           .addClass('restore-borrower')
+                           .html('<i class="fas fa-undo"></i>');
+
+        $('.restore-borrower').on('click', function() {
+            restoreBorrower($(this));
+        });
+    } else {
+        $(`[data-borrower="${removedBorrower}"]`).remove();
+        $(`[data-summary-borrower="${removedBorrower}"]`).remove();
+    }
+    
+    //$('#nav-borrower-next').addClass('d-none');
 }
 
 
@@ -240,8 +279,13 @@ function insertSelected(aContainer, aContent, bContainer, bContent, next, flag)
     if (aContainer.children().length > 0) {
         let card = aContainer.find(`[${flag}]`); // get the index of the card
         let index = card.attr(flag);
-        if (index == currentBook) {
+        if (index == currentBook && flag == 'data-book') {
+            // console.log(index, currentBook);
             closeBook( card.find('.close-book') );
+        }
+
+        if (index == currentBorrower && flag == 'data-borrower') {
+            closeBorrower( card.find('.close-borrower') );
         }
     }
     aContainer.html(aContent);

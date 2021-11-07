@@ -42,6 +42,11 @@
         echo '<tbody>';
         while ($row = $searchResult->fetch_assoc())
         {
+            if ( isset($_GET['restrict']) && $_GET['restrict'] ) {
+                if ( $_GET['restrict'] == $row['id'] ) {
+                    break;
+                }
+            }
             echo '<tr>';
             echo '<td class="col">'.$row['id'].'</td>';
             echo '<td class="col">'.$row['fName'].'</td>';

@@ -55,12 +55,16 @@
                 /** Borrower ***************************************************/
                 echo '<div class="mb-4" data-page="1">';
                 echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3">Borrower Identification</h3>';
+                echo '    <div class="d-none" data-current-borrower="'.$borrowerRow['id'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-borrowers" class="mb-2">Search by Borrower ID, Last Name, or Email (select only one)</label>';
-                echo '        <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" value="'.$borrowerRow['id'].'" onkeyup="showBorrowers(this.value)">';
+                echo '        <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" value="" onkeyup="showBorrowers(this.value, '.$borrowerRow['id'].')">';
                 echo '    </div>';
                 echo '    <div id="borrower-results" class="ajax-results bg-light"></div>';
-                echo '    <div id="selected-borrower" class="my-4 select-box position-relative">';
+                echo '    <h4>PREVIOUS BORROWER</h4>';
+                echo '    <div id="previous-borrower" class="my-4 select-box bg-light position-relative"></div>';
+                echo '    <h4>CURRENT BORROWER</h4>';
+                echo '    <div id="selected-borrower" class="my-4 select-box bg-light position-relative">';
                 echo '        <div class="p-4 border border-success" data-borrower="'.$borrowerRow['id'].'">';
                 echo '              <div class="close close-borrower"><i class="fas fa-times"></i></div>';
                 echo '              <div><strong>ID:</strong> '.$borrowerRow['id'].'</div>';
@@ -87,8 +91,10 @@
                 echo '        <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" value="" onkeyup="showBooks(this.value, '.$bookRow['id'].')">';
                 echo '    </div>';
                 echo '    <div id="book-results" class="ajax-results bg-light"></div>';
-                echo '    <div id="previous-book" class="my-4 select-box d-block d-lg-flex justify-content-start flex-wrap"></div>';
-                echo '    <div id="selected-book" class="my-4 select-box d-block d-lg-flex justify-content-start flex-wrap">';
+                echo '    <h4>PREVIOUS BOOK</h4>';
+                echo '    <div id="previous-book" class="my-4 select-box bg-light position-relative"></div>';
+                echo '    <h4>CURRENT BOOK</h4>';
+                echo '    <div id="selected-book" class="my-4 select-box bg-light position-relative">';
                 echo '          <div class="p-4 border border-success position-relative" data-book="'.$bookRow['id'].'">';
                 echo '          <div class="close close-book"><i class="fas fa-times"></i></div>';
                 echo '          <div><strong>ID:</strong> '.$bookRow['id'].'</div>';

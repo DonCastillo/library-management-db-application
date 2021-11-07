@@ -31,6 +31,10 @@ table i {
 .ajax-results {
     height: 400px;
     overflow-y: auto;
+    margin-bottom: 50px;
+}
+.select-box {
+    min-height: 200px;
 }
 summary {
     list-style: none;
