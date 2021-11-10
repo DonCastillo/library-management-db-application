@@ -82,8 +82,8 @@
                     echo '<td class="col">'.$row['prov'].'</td>';
                     echo '<td class="col">'.$row['postalCode'].'</td>';
                     echo '<td class="col">';
-                    echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="/"><i class="fas fa-eye"></i>';
-                    echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="/"><i class="fas fa-edit"></i></a>';
+                    echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/borrower.php?id='.$row['id'].'"><i class="fas fa-eye"></i>';
+                    echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="../edit/borrower.php?id='.$row['id'].'"><i class="fas fa-edit"></i></a>';
                     echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="../delete/borrower.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a>';
                     echo '</td>';
                     echo '</tr>';

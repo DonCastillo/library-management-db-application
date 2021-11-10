@@ -63,7 +63,7 @@
                 <label for="postalCode" class="mb-2">Postal Code</label>
                 <input type="text" class="form-control" id="postalCode" name="postalCode" maxlength="10">
             </div>
-             <div class="form-group mb-4">
+            <div class="form-group mb-4">
                 <input type="submit" class="form-control btn btn-primary" value="Save">
             </div>
         </form>
