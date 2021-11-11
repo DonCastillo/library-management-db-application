@@ -315,6 +315,19 @@ function showSummary()
 
 }
 
+function populateForm()
+{
+    let selectedBorrowerID = $('#selected-borrower').children('.border-success').attr('data-borrower');
+    let selectedBookID = $('#selected-book').children('.border-success').attr('data-book');
+    let selectedRentalDate = $('#rentalDate').val();
+    let selectedDueDate = $('#dueDate').val();
+    $('[name="form-new-borrower"]').val( selectedBorrowerID );
+    $('[name="form-new-book"]').val( selectedBookID );
+    $('[name="form-new-rentalDate"]').val( selectedRentalDate );
+    $('[name="form-new-dueDate"]').val( selectedDueDate );
+
+}
+
 
 function insertSelected(aContainer, aContent, bContainer, bContent, flag)
 {

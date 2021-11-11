@@ -127,7 +127,7 @@
                 echo '    <div id="date-error" class="p-3 text-white bg-danger d-none"></div>';
                 echo '    <div class="my-4 d-flex justify-content-between">';
                 echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
-                echo '        <div id="nav-date-next" class="arrow" onclick="next(); showSummary();">NEXT <i class="fas fa-arrow-right"></i></div>';
+                echo '        <div id="nav-date-next" class="arrow" onclick="next(); showSummary(); populateForm();">NEXT <i class="fas fa-arrow-right"></i></div>';
                 echo '    </div>';
                 echo '</div>';
                 /** Dates ***************************************************/
@@ -184,6 +184,21 @@
                     echo '      </table>';
                     /** Due Date *******************************************************/
 
+
+                    /** Form ***********************************************************/
+                    echo '      <form method="POST" action="../update/rent.php">';
+                    echo '      <input type="hidden" name="form-old-borrower" value="'.$rentalRow['borrowerID'].'">';
+                    echo '      <input type="hidden" name="form-new-borrower" value="">';
+                    echo '      <input type="hidden" name="form-old-book" value="'.$rentalRow['bookID'].'">';
+                    echo '      <input type="hidden" name="form-new-book" value="">';
+                    echo '      <input type="hidden" name="form-old-rentalDate" value="'.$rentalRow['rentalDate'].'">';
+                    echo '      <input type="hidden" name="form-new-rentalDate" value="">';
+                    echo '      <input type="hidden" name="form-old-dueDate" value="'.$rentalRow['dueDate'].'">';
+                    echo '      <input type="hidden" name="form-new-dueDate" value="">';
+                    echo '      <input type="submit" class="form-control btn btn-primary" value="Update Rent">';
+                    echo '      </form>';
+                    /** Form ***********************************************************/
+
                 echo '    <div class="my-4 d-flex justify-content-start">';
                 echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
                 echo '    </div>';
@@ -209,6 +224,7 @@
 <?php
     $footer = new Footer();
     $footer->addScript('../js/site.js');
+    $footer->addScript('../js/edit-rent.js');
     $footer->addScript('../js/edit-rent.js');
     $footer->drawFooter();
 ?>
