@@ -225,6 +225,5 @@
     $footer = new Footer();
     $footer->addScript('../js/site.js');
     $footer->addScript('../js/edit-rent.js');
-    $footer->addScript('../js/edit-rent.js');
     $footer->drawFooter();
 ?>

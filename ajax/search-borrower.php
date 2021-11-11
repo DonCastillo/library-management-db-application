@@ -44,7 +44,7 @@
         {
             if ( isset($_GET['restrict']) && $_GET['restrict'] ) {
                 if ( $_GET['restrict'] == $row['id'] ) {
-                    break;
+                    continue;
                 }
             }
             echo '<tr>';
