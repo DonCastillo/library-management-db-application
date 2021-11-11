@@ -75,7 +75,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../create/rent.php">
+                                        <a href="../create/rental.php">
                                             <i class="fas fa-file-export"></i>    
                                             <div>Rent a book</div>
                                         </a>

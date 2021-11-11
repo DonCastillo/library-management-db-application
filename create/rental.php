@@ -72,7 +72,7 @@
         <!--summary-->
         <div class="mb-4 d-none" data-page="4">
            
-            <form action="../insert/rent.php" method="post">
+            <form action="../insert/rental.php" method="post">
                 <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Summary</h3>
                 <summary>
                     <h4>Borrower</h4>
