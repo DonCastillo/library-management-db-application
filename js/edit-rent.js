@@ -50,7 +50,6 @@ $(document).ready(function () {
 /** enable next navigation *******************************************************/
 function toggleBorrowerNext()
 {
-    console.log('HELLO')
     if ( $('#selected-borrower').children().length > 0 ) {
         $('#nav-borrower-next').show();
     } else {
@@ -297,6 +296,24 @@ function selectBookTuple (thisSelectButton)
 /** select tuple ************************************************************/
 
 
+function insertToSummary(selectedEl, summaryCon)
+{
+    let selectedClone = selectedEl.children('.border-success').clone();
+    selectedClone.removeAttr('class').removeAttr('data-borrower');
+    selectedClone.find('.close').remove();
+    selectedClone.find('div:has(strong)').remove();
+    summaryCon.html(selectedClone);
+}
+
+
+function showSummary()
+{
+    insertToSummary( $('#selected-borrower'), $('#summary-borrower') );
+    insertToSummary( $('#selected-book'), $('#summary-book') );
+    $('#summary-rental').html( moment( $('#rentalDate').val() ).format('LL') );
+    $('#summary-due').html( moment( $('#dueDate').val() ).format('LL') );
+
+}
 
 
 function insertSelected(aContainer, aContent, bContainer, bContent, flag)
@@ -344,14 +361,6 @@ function prev()
     rentPage--;
     togglePages();
 }
-
-
-
-
-
-
-
-
 
 
 function changeDueDate(date)

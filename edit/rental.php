@@ -127,153 +127,69 @@
                 echo '    <div id="date-error" class="p-3 text-white bg-danger d-none"></div>';
                 echo '    <div class="my-4 d-flex justify-content-between">';
                 echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
-                echo '        <div id="nav-date-next" class="arrow" onclick="next()">NEXT <i class="fas fa-arrow-right"></i></div>';
+                echo '        <div id="nav-date-next" class="arrow" onclick="next(); showSummary();">NEXT <i class="fas fa-arrow-right"></i></div>';
                 echo '    </div>';
                 echo '</div>';
                 /** Dates ***************************************************/
 
 
-                
-                // $id = $_GET['id'];
+                /** Summary *************************************************/
+                echo '<div class="mb-4 d-none" data-page="4">';
+                echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3 mb-5">Summary</h3>';
 
-                // $bookSql = "select * 
-                //             from BOOK 
-                //             where id = $id";
-
-                // $authorSql = "select AUTHOR.id, AUTHOR.fName, AUTHOR.lName
-                //               from WRITES
-                //               join AUTHOR
-                //               where WRITES.authorID = AUTHOR.id and WRITES.bookID = $id
-                //               order by AUTHOR.lName";
-
-                // $genreSql = "select GENRE.name 
-                //              from ASSIGNS 
-                //              join GENRE 
-                //              where ASSIGNS.genreName = GENRE.name and ASSIGNS.bookID = $id
-                //              order by GENRE.name";
-
-                // $allAuthors = "select * 
-                //                from AUTHOR 
-                //                order by lName asc";
-
-                // $allGenres = "select *
-                //               from GENRE
-                //               order by name asc";
-
-                // $bookResult = $conn->query($bookSql);
-                // $authorResult = $conn->query($authorSql);
-                // $genreResult = $conn->query($genreSql);
-                // $allAuthorsResult = $conn->query($allAuthors);
-                // $allGenresResult = $conn->query($allGenres);
-
-                // if ($bookResult && $bookResult->num_rows > 0)
-                // {
-
-                //     $bookRow = $bookResult->fetch_assoc();
-
-                //     $authorOptions = [];
-                //     $genreOptions = [];
-
-                //     /** hidden values **************************************************************************************************************************************************/
-                //     while ($authorRow = $authorResult->fetch_assoc())
-                //     {
-                //         echo '<span class="d-none" data-author="'.$authorRow['id'].'"></span>';
-                //     }
-                //     while ($genreRow = $genreResult->fetch_assoc())
-                //     {
-                //         echo '<span class="d-none" data-genre="'.$genreRow['name'].'"></span>';
-                //     }
-                //     /** hidden values **************************************************************************************************************************************************/
-
-             
-
-                //     echo '<form action="../update/book.php" method="post">';
-                //     echo '    <input type="hidden" name="id" value="'.$bookRow['id'].'">';
-
-                //     /** title **********************************************************************************************************************************************************/
-                //     echo '<div class="form-group mb-4">';
-                //     echo '      <label for="title" class="mb-2">Book Title</label>';
-                //     echo '      <input type="text" class="form-control" id="title" name="title" placeholder="Alice in Wonderland" value="'.$bookRow['title'].'" maxlength=100 required>';
-                //     echo '</div>';
-                //     /** title **********************************************************************************************************************************************************/
+                    /** Borrower Identification *************************************************/
+                    echo '      <table class="table table-striped">';
+                    echo '          <tr>';
+                    echo '              <td class="col-12"><strong>UPDATED BORROWER IDENTIFICATION</strong></td>';
+                    echo '          </tr>';
+                    echo '          <tr>';
+                    echo '              <td class="col-12" id="summary-borrower"></td>';
+                    echo '          </tr>';
+                    echo '      </table>';
+                    /** Borrower Identification *************************************************/
 
 
-                //     /** initial author *************************************************************************************************************************************************/
-                //     echo '<div class="form-group mb-4 p-4 multiple-select author-multiple-select">';
-                //     echo '      <label for="title" class="mb-2">Add Author</label>';
-                //     echo '      <div class="container-fluid">';
-                //     echo '          <div class="row mt-3 author">';
-                //     echo '              <select name="authors[]" class="form-control flex-grow-1">';
-                //     echo '                  <option value="">No author selected</option>';
-                //                             while ($authorRow = $allAuthorsResult->fetch_assoc())
-                //                             {
-                //                                 if(!$authorRow['fName']) 
-                //                                 {
-                //                                     echo '<option value="'.$authorRow['id'].'">'.$authorRow['lName'].'</option>';
-                //                                 } 
-                //                                 else 
-                //                                 {
-                //                                     echo '<option value="'.$authorRow['id'].'">'.$authorRow['lName'].', '.$authorRow['fName'].'</option>';
-                //                                 }
-                //                             } 
-                //     echo '              </select>';
-                //     echo '              <div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
-                //     echo '              <div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
-                //     echo '          </div>';   
-                //     echo '      </div>';
-                //     echo '</div>';
-                //     /** initial author *************************************************************************************************************************************************/
+                    /** Book ********************************************************************/
+                    echo '      <table class="table table-striped">';
+                    echo '          <tr>';
+                    echo '              <td class="col-12"><strong>UPDATED RENTED BOOK</strong></td>';
+                    echo '          </tr>';
+                    echo '          <tr>';
+                    echo '              <td class="col-12" id="summary-book"></td>';
+                    echo '          </tr>';
+                    echo '      </table>';
+                    /** Book ********************************************************************/
 
 
-                //     /** pub year *******************************************************************************************************************************************************/
-                //     echo '<div class="form-group mb-4">';
-                //     echo '    <label for="pubYear" class="mb-2">Publication Year</label>';
-                //     echo '    <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" value="'.$bookRow['pubYear'].'" maxlength="4" min="1500">';
-                //     echo '</div>';
-                //     /** pub year *******************************************************************************************************************************************************/
+                    /** Rental Date *************************************************************/
+                    echo '      <table class="table table-striped">';
+                    echo '          <tr>';
+                    echo '              <td class="col-12"><strong>UPDATED RENTAL DATE</strong></td>';
+                    echo '          </tr>';
+                    echo '          <tr>';
+                    echo '              <td class="col-12" id="summary-rental"></td>';
+                    echo '          </tr>';
+                    echo '      </table>';
+                    /** Rental Date *************************************************************/
 
 
-                //     /** num copies *****************************************************************************************************************************************************/
-                //     echo '<div class="form-group mb-4">';
-                //     echo '    <label for="amount" class="mb-2">Number of Copies</label>';
-                //     echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'].'" maxlength="2" min="0" max="25">';
-                //     echo '</div>';
-                //     /** num copies *****************************************************************************************************************************************************/
+                    /** Due Date *******************************************************/
+                    echo '      <table class="table table-striped">';
+                    echo '          <tr>';
+                    echo '              <td class="col-12"><strong>UPDATED DUE DATE</strong></td>';
+                    echo '          </tr>';
+                    echo '          <tr>';
+                    echo '              <td class="col-12" id="summary-due"></td>';
+                    echo '          </tr>';
+                    echo '      </table>';
+                    /** Due Date *******************************************************/
 
-                    
-                //     /** genre **********************************************************************************************************************************************************/
+                echo '    <div class="my-4 d-flex justify-content-start">';
+                echo '        <div class="arrow" onclick="prev()">PREV <i class="fas fa-arrow-left"></i></div>';
+                echo '    </div>';
+                echo '</div>';
+                /** Summary *************************************************/
 
-                //     echo '<div class="form-group mb-4 p-4 multiple-select genre-multiple-select">';
-                //     echo '      <label for="genre" class="mb-2">Assign Genre</label>';
-                //     echo '      <div class="container-fluid">';
-                //     echo '          <div class="row mt-3 genre">';
-                //     echo '              <select name="genres[]" class="form-control flex-grow-1">';
-                //     echo '                  <option value="">No genre selected</option>';
-                //                             while ($genreRow = $allGenresResult->fetch_assoc()) 
-                //                             {
-                //                                 echo '<option value="'.$genreRow['name'].'">'.$genreRow['name'].'</option>';
-                //                             }
-                //     echo '              </select>';
-                //     echo '              <div class="btn btn-secondary addfield" onclick="addField(this)"><i class="fas fa-plus"></i></div>';
-                //     echo '              <div class="btn btn-secondary addfield" onclick="removeField(this)"><i class="fas fa-minus"></i></div>';
-                //     echo '          </div>';
-                //     echo '      </div>';
-                //     echo '</div>';
-                //     /** genre **********************************************************************************************************************************************************/
-
-
-                //     echo '<div class="form-group mb-4">';
-                //     echo '      <input type="submit" class="form-control btn btn-primary" value="Update">';
-                //     echo '</div>';
-            
-
-                //     echo '</form>';
-
-                // }
-                // else
-                // {
-                //     echo '<div class="text-muted">No books found.</div>';
-                // }
             }
             else
             {
