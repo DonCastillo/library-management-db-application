@@ -9,15 +9,21 @@
         exit;
     }
 
+    $restrict = (isset($_GET['restrict']) && $_GET['restrict']) ? $_GET['restrict'] : '';
 
-    $searchSql = "select * from BORROWER";
+    $searchSql = "select * from BORROWER where id != '$restrict'";
+
+
 
     if ( $_GET['search'] )
     {
         $searchSql = "select * from BORROWER 
-                      where lName like '%$_GET[search]%' or 
-                            id like '%$_GET[search]%' or
-                            email like '%$_GET[search]%'";   
+                      where id != '$restrict' and 
+                            (
+                                lName like '%$_GET[search]%' or 
+                                id like '%$_GET[search]%' or
+                                email like '%$_GET[search]%'
+                            )";   
     }
 
     $searchResult = $conn->query($searchSql);
@@ -32,7 +38,7 @@
         echo '<th scope="col">Last Name</th>';
         echo '<th scope="col">Email</th>';
         echo '<th scope="col">Phone Number</th>';
-        echo '<th scope="col">Street</th>';
+        echo '<th scope="col">Address</th>';
         echo '<th scope="col">City</th>';
         echo '<th scope="col">Province</th>';
         echo '<th scope="col">Postal Code</th>';
@@ -42,11 +48,6 @@
         echo '<tbody>';
         while ($row = $searchResult->fetch_assoc())
         {
-            if ( isset($_GET['restrict']) && $_GET['restrict'] ) {
-                if ( $_GET['restrict'] == $row['id'] ) {
-                    continue;
-                }
-            }
             echo '<tr>';
             echo '<td class="col">'.$row['id'].'</td>';
             echo '<td class="col">'.$row['fName'].'</td>';
@@ -61,7 +62,6 @@
             echo '<button type="button" class="select-borrower-tuple">SELECT</button>';
             echo '</td>';
             echo '</tr>';
-
         }
         
         echo '</tbody>';

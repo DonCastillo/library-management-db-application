@@ -9,14 +9,18 @@ if ($conn->connect_errno) {
     exit;
 }
 
+$restrict = (isset($_GET['restrict']) && $_GET['restrict']) ? $_GET['restrict'] : ''; 
 
-$searchSql = "select * from BOOK";
+$searchSql = "select * from BOOK where id != '$restrict'";
 
 if ( $_GET['search'] )
 {
     $searchSql = "select * from BOOK 
-                  where title like '%$_GET[search]%' or 
-                        id like '%$_GET[search]%'";   
+                  where id != '$restrict' and
+                        (
+                            title like '%$_GET[search]%' or 
+                            id like '%$_GET[search]%'
+                        )";   
 }
 
 $searchResult = $conn->query($searchSql);
@@ -37,11 +41,6 @@ if ($searchResult && $searchResult->num_rows > 0)
     echo '<tbody>';
     while ($row = $searchResult->fetch_assoc())
     {
-        if ( isset($_GET['restrict']) && $_GET['restrict'] ) {
-            if ( $_GET['restrict'] == $row['id'] ) {
-                continue;
-            }
-        }
         echo '<tr>';
         echo '<td class="col">'.$row['id'].'</td>';
         echo '<td class="col">'.$row['title'].'</td>';
