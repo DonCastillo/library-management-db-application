@@ -38,6 +38,10 @@ table i {
 }
 summary {
     list-style: none;
+    cursor: default;
+}
+button[disabled] {
+    cursor: not-allowed;
 }
 /* select.form-control {
     width:unset;

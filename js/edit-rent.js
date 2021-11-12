@@ -381,7 +381,7 @@ function changeDueDate(date)
     $('#rentalDate').val(date);
     let rentalDate = date;
     let dueDate = moment(rentalDate).add(2, 'week').format('YYYY-MM-DD');
-    console.log(dueDate);
+    // console.log(dueDate);
     $('#dueDate').val(dueDate);
 }
 
@@ -391,10 +391,12 @@ function validateDate()
     dueDate = $('#dueDate').val();
     updateSummaryDates(rentDate, dueDate);
 
+    console.log(rentDate);
     if (!rentDate) {
         $('#nav-date-next').addClass('d-none');
         $('#date-error').text('Specify a rental date.');
         $('#date-error').removeClass('d-none');
+        return;
     }
     // valid
     if( moment(rentDate).isBefore(dueDate) ) {

@@ -75,12 +75,22 @@
             <form action="../insert/rental.php" method="post">
                 <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Summary</h3>
                 <summary>
-                    <h4>Borrower</h4>
-                    <div id="summary-borrower" class="mb-4"></div>
-                    <h4>Books</h4>
-                    <div id="summary-book" class="mb-4"></div>
-                    <h4>Dates</h4>
-                    <div id="summary-date" class="mb-4"></div>
+
+                    <table class="table table-striped">
+                        <tr><td class="col-12"><strong>BORROWER IDENTIFICATION</strong></td></tr>
+                        <tr><td class="col-12" id="summary-borrower"></td></tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr><td class="col-12"><strong>BOOKS</strong></td></tr>
+                        <tr><td class="col-12" id="summary-book"></td></tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr><td class="col-12"><strong>DATES</strong></td></tr>
+                        <tr><td class="col-12" id="summary-date"></td></tr>
+                    </table>
+                    
                 </summary>
                 <input type="submit" class="form-control btn btn-primary" value="Rent">
             </form>

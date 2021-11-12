@@ -67,11 +67,11 @@ function showBorrowers(str)
                     <div>${postal}</div>
                 </div>`;
                 let selectedBorrowerSummary = `
-                <div class="p-4" data-summary-borrower="${id}">
-                    <div><strong>ID:</strong> ${id}</div>
+                <div class="" data-summary-borrower="${id}">
                     <div>${name}</div>
                     <div>${email}</div>
                     <div>${phone}</div>
+                    <br>
                     <div>${address}</div>
                     <div>${postal}</div>
                     <input type="hidden" value="${id}" name="borrowerID">
@@ -79,7 +79,7 @@ function showBorrowers(str)
                 `;
                
                 $('#selected-borrower').html(selectedBorrower); // individual
-                $('summary > #summary-borrower').html(selectedBorrowerSummary); // summary
+                $('summary #summary-borrower').html(selectedBorrowerSummary); // summary
                 $('#nav-borrower-next').removeClass('d-none'); 
 
                 $('.close-borrower').on('click', function(event) {
@@ -126,8 +126,7 @@ function showBooks(str)
                 `;
 
                 let selectedBookSummary = `
-                <div class="p-4" data-summary-book="${id}">
-                    <div><strong>ID:</strong> ${id}</div>
+                <div class="py-3 mb-3 border-bottom" data-summary-book="${id}">
                     <div>${title} (${year})</div>
                     <div>by ${author}</div>
                     <input type="hidden" value="${id}" name="bookID[]">
@@ -135,7 +134,7 @@ function showBooks(str)
                 `;
 
                 $('#selected-book').append(selectedBook);
-                $('summary > #summary-book').append(selectedBookSummary); // summary
+                $('summary #summary-book').append(selectedBookSummary); // summary
                 $('#nav-book-next').removeClass('d-none');
     
                 $('.close').on('click', function(event){
@@ -197,6 +196,7 @@ function validateDate()
         $('#nav-date-next').addClass('d-none');
         $('#date-error').text('Specify a rental date.');
         $('#date-error').removeClass('d-none');
+        return;
     }
     // valid
     if( moment(rentDate).isBefore(dueDate) ) {
@@ -224,6 +224,6 @@ function updateSummaryDates(rentDate, dueDate)
         <input type="hidden" value="${dueDate}" name="dueDate">
     </div>
     `
-    $('summary > #summary-date').html(rentDateEl)
+    $('summary #summary-date').html(rentDateEl)
 
 }
