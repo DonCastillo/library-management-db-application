@@ -27,7 +27,8 @@
 
             $proceed = (isset($_POST['borrowerID']) && $_POST['borrowerID']) &&
                        (isset($_POST['bookID']) && $_POST['bookID']) &&
-                       (isset($_POST['rentDate']) && $_POST['rentDate']);
+                       (isset($_POST['rentDate']) && $_POST['rentDate']) &&
+                       (isset($_POST['dueDate']) && $_POST['dueDate']);
 
             if ($proceed) 
             {
@@ -48,21 +49,28 @@
 
                             if ($rentalResult)
                             {
-                                echo '<div class="bg-danger text-white p-3">
-                                        The borrower with ID '.$_POST['borrowerID'].' already rented a book with ID '.$book.' on '.$_POST['rentDate'].'.
-                                      </div>';
-
+                                    echo '<div class="bg-success text-white p-3">Rental complete.</div>';
+                                    
+                                    // subtract amount of the book from the BOOK table
+                                    $newAmount = $bookAmount - 1;
+                                    $updateBook = "update BOOK set amount = '$newAmount' where id = '$book'";
+                                    $conn->query($updateBook);
                             }
-
-                            // subtract amount of the book from the BOOK table
-                            $newAmount = $bookAmount - 1;
-                            $updateBook = "update BOOK set amount = '$newAmount' where id = '$book'";
-                            $conn->query($updateBook);
+                            else
+                            {
+                                    echo '<div class="bg-danger text-white p-3">
+                                        The borrower with ID '.$_POST['borrowerID'].' already rented a book with ID '.$book.' on '.$_POST['rentDate'].'.
+                                        <br>
+                                        A borrower is not allowed to rent the same books on the same date.
+                                        </div>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<div class="bg-danger text-white p-3">Book to be rented is unavailable.</div>';
                         }
 
                     }
-
-                    echo '<div class="bg-success text-white p-3">Rental complete.</div>';
                 }
                 catch (Exception $e)
                 {

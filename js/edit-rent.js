@@ -1,5 +1,5 @@
 
-var rentPage = 3;
+var rentPage = 1;
 var currentBook = $('[data-current-book]').attr('data-current-book');
 var currentBorrower = $('[data-current-borrower]').attr('data-current-borrower');
 

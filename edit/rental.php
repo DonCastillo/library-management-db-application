@@ -186,7 +186,7 @@
 
 
                     /** Form ***********************************************************/
-                    echo '      <form method="POST" action="../update/rent.php">';
+                    echo '      <form method="POST" action="../update/rental.php">';
                     echo '      <input type="hidden" name="form-old-borrower" value="'.$rentalRow['borrowerID'].'">';
                     echo '      <input type="hidden" name="form-new-borrower" value="">';
                     echo '      <input type="hidden" name="form-old-book" value="'.$rentalRow['bookID'].'">';
