@@ -60,9 +60,7 @@
                         $rentalResult = $conn->query($rentalSql);
 
                         if ($rentalResult)
-                        {
-                                echo '<div class="bg-success text-white p-3">Rental updated.</div>';
-                                
+                        {       
                                 // subtract amount of old book
                                 $oldBookSql = "select amount from BOOK where id = '$oldBook'";
                                 $oldBookResult = ($conn->query($oldBookSql))->fetch_assoc();
@@ -81,11 +79,12 @@
                                 $newBookSql = "update BOOK set amount = '$a' where id = '$newBook'";
                                 $conn->query($newBookSql);
 
+                                echo '<div class="bg-success text-white p-3 mt-3">Rental updated.</div>';
                         }
                         else
                         {
                                 echo '<div class="bg-danger text-white p-3">
-                                      The borrower with ID '.$_POST['borrowerID'].' already rented a book with ID '.$book.' on '.$_POST['rentDate'].'.
+                                      The borrower with ID '.$newBorrower.' already rented a book with ID '.$newBook.' on '.$newRentalDate.'.
                                       <br>
                                       A borrower is not allowed to rent the same books on the same date.
                                       </div>';

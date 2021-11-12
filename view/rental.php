@@ -158,15 +158,9 @@
 
                       if ( isset($_GET['view']) && $_GET['view'] == "delete" )
                       {
-                            /** Form ***********************************************************/
-                            echo '      <form method="POST" action="../delete/rental.php">';
-                            echo '      <input type="hidden" name="borrower" value="'.$rentalRow['borrowerID'].'">';
-                            echo '      <input type="hidden" name="book" value="'.$rentalRow['bookID'].'">';
-                            echo '      <input type="hidden" name="rentalDate" value="'.$rentalRow['rentalDate'].'">';
-                            echo '      <input type="hidden" name="dueDate" value="'.$rentalRow['dueDate'].'">';
-                            echo '      <input type="submit" class="form-control btn btn-danger mt-5" value="Return Book">';
-                            echo '      </form>';
-                            /** Form ***********************************************************/
+                            /** Delete Button ******************************************************/
+                            echo '<a class="btn btn-danger mt-5 w-100" href="../delete/rental.php?borrower='.$rentalRow['borrowerID'].'&book='.$rentalRow['bookID'].'&rental='.$rentalRow['rentalDate'].'">Return Book</a>';
+                            /** Delete Button ******************************************************/
                       }
                 } 
                 else 

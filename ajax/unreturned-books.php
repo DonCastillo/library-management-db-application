@@ -8,24 +8,32 @@ if ($conn->connect_errno) {
     exit;
 }
 
-$searchSql = "select RENTAL.borrowerID, RENTAL.bookID, lName, fName, bookID, rentalDate, dueDate 
-              from BORROWER 
-              join RENTAL 
-              on BORROWER.id = RENTAL.borrowerID 
+$searchSql = "select distinct BORROWER.id as borrowerID, BOOK.id as bookID, lName, fName, title, pubYear, rentalDate, dueDate
+              from RENTAL, BORROWER, BOOK 
+              where RENTAL.borrowerID = BORROWER.id and 
+                    RENTAL.bookID = BOOK.id 
               order by lName";
 
 if ( $_GET['search'] )
 {
-    $searchSql = "select RENTAL.borrowerID, RENTAL.bookID, lName, fName, bookID, rentalDate, dueDate 
-                  from BORROWER
-                  join RENTAL
-                  on BORROWER.id = RENTAL.borrowerID
-                  where BORROWER.id like '%$_GET[search]%' or 
-                        BORROWER.lName like '%$_GET[search]%' or
-                        RENTAL.rentalDate like '%$_GET[search]%'";   
+    $searchSql = "select BORROWER.id as borrowerID, BOOK.id as bookID, lName, fName, title, pubYear, rentalDate, dueDate
+                  from RENTAL
+                  join BORROWER
+                  on RENTAL.borrowerID = BORROWER.id
+                  join BOOK 
+                  on RENTAL.bookID = BOOK.id 
+                  where title like '%$_GET[search]%' or 
+                        lName like '%$_GET[search]%' or 
+                        borrowerID like '%$_GET[search]%' or 
+                        rentalDate like '%$_GET[search]%'
+                  order by lName";   
 }
 
+// print_r($searchSql);
+
 $searchResult = $conn->query($searchSql);
+
+// print_r($searchResult);
 
 if ($searchResult && $searchResult->num_rows > 0) 
 {
@@ -42,16 +50,17 @@ if ($searchResult && $searchResult->num_rows > 0)
     echo '<tbody>';
     while ($row = $searchResult->fetch_assoc())
     {
-        $bookSql = "select * from BOOK where id = '$row[bookID]'";
-        $bookResult = $conn->query($bookSql);
+        // $bookSql = "select * from BOOK where id = '$row[bookID]'";
+        // $bookResult = $conn->query($bookSql);
 
-        if ($bookResult && $bookResult->num_rows > 0) {
-            $bookRow = $bookResult->fetch_assoc();
-            $bookTitle = $bookRow['title'].' ('.$bookRow['pubYear'].')';
-        } else {
-            $bookTitle = '';
-        }
+        // if ($bookResult && $bookResult->num_rows > 0) {
+        //     $bookRow = $bookResult->fetch_assoc();
+        //     $bookTitle = $bookRow['title'].' ('.$bookRow['pubYear'].')';
+        // } else {
+        //     $bookTitle = '';
+        // }
         $borrowerName = $row['fName'].' '.$row['lName'];
+        $bookTitle = $row['title'].' '.'('.$row['pubYear'].')';
         $rentalDate = $row['rentalDate'];
         $dueDate = $row['dueDate'];
 

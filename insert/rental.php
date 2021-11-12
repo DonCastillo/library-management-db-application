@@ -48,13 +48,13 @@
                             $rentalResult = $conn->query($rentalSql);
 
                             if ($rentalResult)
-                            {
-                                    echo '<div class="bg-success text-white p-3">Rental complete.</div>';
-                                    
+                            {                                    
                                     // subtract amount of the book from the BOOK table
                                     $newAmount = $bookAmount - 1;
                                     $updateBook = "update BOOK set amount = '$newAmount' where id = '$book'";
                                     $conn->query($updateBook);
+
+                                    echo '<div class="bg-success text-white p-3 mt-3">Rental complete.</div>';
                             }
                             else
                             {
