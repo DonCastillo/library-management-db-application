@@ -63,7 +63,7 @@ if ($searchResult && $searchResult->num_rows > 0)
         echo '<td>';
         echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/rental.php?borrower='.$row['borrowerID'].'&book='.$row['bookID'].'&rental='.$row['rentalDate'].'"><i class="fas fa-eye"></i>';
         echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="../edit/rental.php?borrower='.$row['borrowerID'].'&book='.$row['bookID'].'&rental='.$row['rentalDate'].'"><i class="fas fa-edit"></i></a>';
-        echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="../delete/rental.php?borrower='.$row['borrowerID'].'&book='.$row['bookID'].'&rental='.$row['rentalDate'].'"><i class="fas fa-trash-alt"></i></a>';
+        echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="../view/rental.php?view=delete&borrower='.$row['borrowerID'].'&book='.$row['bookID'].'&rental='.$row['rentalDate'].'"><div class="d-flex align-items-center" style="font-size:15px; font-weight:bold; line-height:0;"><i class="fas fa-hand-holding" style="margin-right:5px;"></i>RETURN</div></a>';
         echo '</td>';
         echo '</tr>';
 

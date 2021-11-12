@@ -14,8 +14,18 @@
 
 <div class="right p-5">
     <main id="view-page">
-        <h1>View a Rental</h1>
-        <hr>
+
+        <?php
+            if ( isset($_GET['view']) && $_GET['view'] == "delete" ) {
+                echo '<h1>Returning a Book</h1>';
+            } 
+            else 
+            {
+                echo '<h1>View a Rental</h1>';
+            }
+            echo '<hr>';
+        ?>
+
 
         <?php
 
@@ -145,6 +155,19 @@
   
                       echo '</table>';
                       /** Due Date *******************************************************/
+
+                      if ( isset($_GET['view']) && $_GET['view'] == "delete" )
+                      {
+                            /** Form ***********************************************************/
+                            echo '      <form method="POST" action="../delete/rental.php">';
+                            echo '      <input type="hidden" name="borrower" value="'.$rentalRow['borrowerID'].'">';
+                            echo '      <input type="hidden" name="book" value="'.$rentalRow['bookID'].'">';
+                            echo '      <input type="hidden" name="rentalDate" value="'.$rentalRow['rentalDate'].'">';
+                            echo '      <input type="hidden" name="dueDate" value="'.$rentalRow['dueDate'].'">';
+                            echo '      <input type="submit" class="form-control btn btn-danger mt-5" value="Return Book">';
+                            echo '      </form>';
+                            /** Form ***********************************************************/
+                      }
                 } 
                 else 
                 {

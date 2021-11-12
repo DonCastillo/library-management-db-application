@@ -10,20 +10,20 @@ $(document).ready(function () {
     $('#dueDate-raw').text( dueDate.format('LL') );
 
     if ( dueDate.isSame(now, 'day') ) {
-        $('#rent-status').html(`<div class="bg-warning p-3">This book is due today.</div>`);
+        $('#rent-status').html(`<div class="border border-warning border-5 text-warning fw-bold p-3 m-0 bg-white">This book is due today.</div>`);
         return;
     }
 
     
     if( dueDate.isBefore(now, 'day') ) {
         let diff = now.diff(dueDate, 'days');
-        $('#rent-status').html(`<div class="bg-danger text-white p-3">This book is ${diff} days overdue.</div>`);
+        $('#rent-status').html(`<div class="border border-danger border-5 text-danger fw-bold p-3 m-0 bg-white">This book is ${diff} days overdue.</div>`);
         return;
     }
 
     if( dueDate.isAfter(now, 'day') ) {
         let diff = dueDate.diff(now, 'days');
-        $('#rent-status').html(`<div class="bg-success text-white p-3">This book will be due in ${diff} days.</div>`);
+        $('#rent-status').html(`<div class="border border-success border-5 text-success fw-bold p-3 m-0 bg-white">This book will be due in ${diff} days.</div>`);
         return;
     }
 
