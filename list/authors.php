@@ -25,6 +25,21 @@
                 exit;
             }
 
+            
+            // session
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+
+            if (isset($_SESSION['success']) && $_SESSION['success']) {
+                echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+
+
+            // author info
             $sql = 'select id, lName, fName from AUTHOR order by lName asc';
             $result = $conn->query($sql);
 

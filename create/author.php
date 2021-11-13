@@ -14,6 +14,15 @@
     <main>
         <h1>Add an Author</h1>
         <hr>
+
+        <?php
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+            
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+        ?>
    
         <form action="../insert/author.php" method="post">
             <div class="form-group mb-4">
