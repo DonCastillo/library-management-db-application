@@ -1,86 +1,63 @@
 <?php
 
     include '../config.php';
-    include '../head.php';
-    include '../footer.php';
 
-    $head = new Head();
-    $head->setTitle('Authors');
-    $head->addStyle('../css/styles.css');
-    $head->drawHead();
-    $head->drawMenu();
+    if ($conn->connect_errno) 
+    {
+        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+        exit;
+    }
 
-?>
+    if ( isset($_POST['title']) && $_POST['title'] ) 
+    {
+        try 
+        {
+            $sql = "insert into BOOK (title, pubYear, amount) 
+                    values ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
 
-<div class="right p-5">
-    <main>
-        <h1>Add a Book</h1>
-        <hr>
+            $result = $conn->query($sql);
+            $newBookID = $conn->insert_id; // id of the new book just inserted
 
-        <?php
+            $authors = [];
+            $genres = [];
 
-            if ($conn->connect_errno) 
-            {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-                exit;
+            // get all authors id from the $_POST['authors']
+            foreach ($_POST['authors'] as $author) {
+                array_push($authors, $author);
             }
 
-            if ( isset($_POST['title']) && $_POST['title'] ) 
-            {
-                try 
-                {
-                    $sql = "insert into BOOK (title, pubYear, amount) 
-                            values ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
-
-                    $result = $conn->query($sql);
-                    $newBookID = $conn->insert_id; // id of the new book just inserted
-
-                    $authors = [];
-                    $genres = [];
-
-                    // get all authors id from the $_POST['authors']
-                    foreach ($_POST['authors'] as $author) {
-                        array_push($authors, $author);
-                    }
-
-                    // get all genres name from the $_POST['genres']
-                    foreach ($_POST['genres'] as $genre) {
-                        array_push($genres, $genre);
-                    }
-
-                    // remove duplicates
-                    $authors = array_unique($authors);
-                    $genres = array_unique($genres);
-
-                    foreach ($authors as $author) {
-                        $sql = "insert into WRITES (bookID, authorID) values ($newBookID, $author)";
-                        $conn->query($sql);
-                    }
-
-                    foreach ($genres as $genre) {
-                        $sql = "insert into ASSIGNS (genreName, bookID) values ('$genre', $newBookID)";
-                        $conn->query($sql);
-                    }
-
-                    echo '<div class="bg-success text-white p-3">Book added.</div>';
-                }
-                catch (Exception $e)
-                {
-                    echo '<div class="bg-danger text-white p-3">There was a problem in adding a book.</div>';
-                }
-            } 
-            else 
-            {
-                echo '<div class="bg-danger text-white p-3">A required data is needed.</div>';
+            // get all genres name from the $_POST['genres']
+            foreach ($_POST['genres'] as $genre) {
+                array_push($genres, $genre);
             }
-        ?>
 
-    </main>
-</div>
+            // remove duplicates
+            $authors = array_unique($authors);
+            $genres = array_unique($genres);
 
+            foreach ($authors as $author) {
+                $sql = "insert into WRITES (bookID, authorID) values ($newBookID, $author)";
+                $conn->query($sql);
+            }
 
-<?php
-    $footer = new Footer();
-    $footer->addScript('../js/site.js');
-    $footer->drawFooter();
+            foreach ($genres as $genre) {
+                $sql = "insert into ASSIGNS (genreName, bookID) values ('$genre', $newBookID)";
+                $conn->query($sql);
+            }
+
+            $_SESSION['success'] = 'Book added.';
+            header('Location: ../view/book.php?id='.$newBookID);
+            
+        }
+        catch (Exception $e)
+        {
+            $_SESSION['error'] = 'There was a problem in adding a book.';
+            header('Location: ../create/book.php');
+        }
+    } 
+    else 
+    {
+        $_SESSION['error'] = 'A required data is needed.';
+        header('Location: ../create/book.php');
+    }
 ?>
