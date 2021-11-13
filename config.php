@@ -15,5 +15,5 @@ $APP_TIMEZONE = 'America/Edmonton';
 
 $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
-
+session_start();
 ?>
