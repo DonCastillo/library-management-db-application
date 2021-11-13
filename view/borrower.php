@@ -24,6 +24,18 @@
                 exit;
             }
 
+
+            // success message
+            if (isset($_SESSION['success']) && $_SESSION['success']) {
+              echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+
+
+
+            // view borrower info
             if ( isset($_GET['id']) && $_GET['id'] )
             {
 

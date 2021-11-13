@@ -1,70 +1,50 @@
 <?php
 
     include '../config.php';
-    include '../head.php';
-    include '../footer.php';
 
-    $head = new Head();
-    $head->setTitle('Borrowers');
-    $head->addStyle('../css/styles.css');
-    $head->drawHead();
-    $head->drawMenu();
+    if ($conn->connect_errno)
+    {
+        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+        exit;
+    }
 
-?>
+    if ( (isset($_POST['lName']) && $_POST['lName']) && (isset($_POST['email']) && $_POST['email']) )
+    {
+        try
+        {
+            $sql = "insert into BORROWER (fName, lName, email, phone, street, city, prov, postalCode)
+                    values ('$_POST[fName]', '$_POST[lName]', '$_POST[email]',
+                            '$_POST[phone]', '$_POST[street]', '$_POST[city]',
+                            '$_POST[prov]', '$_POST[postalCode]')";
 
-<div class="right p-5">
-    <main>
-        <h1>Add a Borrower</h1>
-        <hr>
+            $result = $conn->query($sql);
 
-        <?php
-
-            if ($conn->connect_errno)
+            if ($result)
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-                exit;
-            }
-
-            if ( isset($_POST['lName']) && $_POST['email'] )
-            {
-                try
-                {
-                    $sql = "insert into BORROWER (fName, lName, email, phone, street, city, prov, postalCode)
-                            values ('$_POST[fName]', '$_POST[lName]', '$_POST[email]',
-                                    '$_POST[phone]', '$_POST[street]', '$_POST[city]',
-                                    '$_POST[prov]', '$_POST[postalCode]')";
-
-                    $result = $conn->query($sql);
-                    $newBorrowerID = $conn->insert_id;
-
-                    $borrowers = [];
-
-                    // get all borrowers id from the $_POST['borrowers']
-                    foreach ($_POST['borrowers'] as $borrower) {
-                        array_push($borrowers, $borrower);
-                    }
-
-                    // remove duplicates
-                    $borrowers = array_unique($borrowers);
-
-                    echo '<div class="bg-success text-white p-3">Borrower added.</div>';
-                }
-                catch (Exception $e)
-                {
-                    echo '<div class="bg-danger text-white p-3">There was a problem in adding a borrower.</div>';
-                }
+                $_SESSION['success'] = 'Borrower added.';
+                header('Location: ../view/borrower.php?id='.$conn->insert_id);
             }
             else
             {
-                echo '<div class="bg-danger text-white p-3">A required data is needed.</div>';
+                $err = $conn->errno;
+                if ($err == 1062)
+                {
+                    $_SESSION['error'] = 'A borrower with the same email already exists.';
+                    header('Location: ../create/borrower.php');
+                }
+                // $_SESSION['error'] = 'Adding a borrower failed.';
+                // header('Location: ../create/borrower.php');
             }
-        ?>
-
-    </main>
-</div>
-
-<?php
-    $footer = new Footer();
-    $footer->addScript('../js/site.js');
-    $footer->drawFooter();
+        }
+        catch (Exception $e)
+        {
+            $_SESSION['error'] = 'There was a problem in adding a borrower.';
+            header('Location: ../create/borrower.php');
+        }
+    }
+    else
+    {
+        $_SESSION['error'] = 'A required data is needed.';
+        header('Location: ../create/borrower.php');
+    }
 ?>

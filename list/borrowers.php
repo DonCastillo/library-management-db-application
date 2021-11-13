@@ -24,17 +24,22 @@
                 exit;
             }
 
-            $sql = 'select id,
-                           fName,
-                           lName,
-                           email,
-                           phone,
-                           street,
-                           city,
-                           prov,
-                           postalCode
-                    from BORROWER
-                    order by id asc';
+
+            // session
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+
+            if (isset($_SESSION['success']) && $_SESSION['success']) {
+                echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+
+
+            // borrower info
+            $sql = 'select * from BORROWER order by lName asc';
 
             $result = $conn->query($sql);
 
@@ -48,8 +53,8 @@
                 echo '<table class="table table-striped">';
                 echo '<thead>';
                 echo '<tr>';
-                echo '<th scope="col">First Name</th>';
                 echo '<th scope="col">Last Name</th>';
+                echo '<th scope="col">First Name</th>';
                 echo '<th scope="col">Email</th>';
                 echo '<th scope="col">Phone Number</th>';
                 echo '<th scope="col">Street</th>';
@@ -63,8 +68,8 @@
 
                 while($row = $result->fetch_assoc()) {
                     echo '<tr>';
-                    echo '<td class="col">'.$row['fName'].'</td>';
                     echo '<td class="col">'.$row['lName'].'</td>';
+                    echo '<td class="col">'.$row['fName'].'</td>';
                     echo '<td class="col">'.$row['email'].'</td>';
                     echo '<td class="col">'.$row['phone'].'</td>';
                     echo '<td class="col">'.$row['street'].'</td>';

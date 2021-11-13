@@ -177,7 +177,7 @@ create table BORROWER(
     id int unsigned not null auto_increment,
     fName varchar(35),
     lName varchar(45) not null,
-    email varchar(35) not null,
+    email varchar(35) not null unique,
     phone varchar(15),
     street varchar(30),
     city varchar(30),
