@@ -1,98 +1,100 @@
 <?php
+
     include '../config.php';
-    include '../head.php';
-    include '../footer.php';
 
-    $head = new Head();
-    $head->setTitle('Authors');
-    $head->addStyle('../css/styles.css');
-    $head->drawHead();
-    $head->drawMenu();
-?>
+    if ($conn->connect_errno) 
+    {
+        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+        exit;
+    }
 
+    $proceed = (isset($_POST['borrowerID']) && $_POST['borrowerID']) &&
+                (isset($_POST['bookID']) && $_POST['bookID']) &&
+                (isset($_POST['rentDate']) && $_POST['rentDate']) &&
+                (isset($_POST['dueDate']) && $_POST['dueDate']);
 
+    if ($proceed) 
+    {
+        $message = '';
 
-<div class="right p-5">
-    <main>
-        <h1>Rent a Book</h1>
-        <hr>
-
-        <?php
-
-            if ($conn->connect_errno) 
+        try 
+        {
+            foreach ($_POST['bookID'] as $book) 
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-                exit;
-            }
-
-            $proceed = (isset($_POST['borrowerID']) && $_POST['borrowerID']) &&
-                       (isset($_POST['bookID']) && $_POST['bookID']) &&
-                       (isset($_POST['rentDate']) && $_POST['rentDate']) &&
-                       (isset($_POST['dueDate']) && $_POST['dueDate']);
-
-            if ($proceed) 
-            {
-                try 
+                $bookAvailSql = "select amount from BOOK where id = '$book' LIMIT 1";
+                $bookResult = ($conn->query($bookAvailSql))->fetch_assoc();
+                $bookAmount = $bookResult['amount'];
+                
+                if ($bookAmount > 0)
                 {
-                    foreach ($_POST['bookID'] as $book) 
-                    {
-                        $bookAvailSql = "select amount from BOOK where id = '$book' LIMIT 1";
-                        $bookResult = ($conn->query($bookAvailSql))->fetch_assoc();
-                        $bookAmount = $bookResult['amount'];
-                        
-                        if ($bookAmount > 0)
-                        {
-                            // insert new tuple to the RENTAL table
-                            $rentalSql = "insert into RENTAL (bookID, borrowerID, rentalDate, dueDate) 
-                                          values ('$book', '$_POST[borrowerID]', '$_POST[rentDate]', '$_POST[dueDate]')";
-                            $rentalResult = $conn->query($rentalSql);
+                    // insert new tuple to the RENTAL table
+                    $rentalSql = "insert into RENTAL (bookID, borrowerID, rentalDate, dueDate) 
+                                    values ('$book', '$_POST[borrowerID]', '$_POST[rentDate]', '$_POST[dueDate]')";
+                    $rentalResult = $conn->query($rentalSql);
 
-                            if ($rentalResult)
-                            {                                    
-                                    // subtract amount of the book from the BOOK table
-                                    $newAmount = $bookAmount - 1;
-                                    $updateBook = "update BOOK set amount = '$newAmount' where id = '$book'";
-                                    $conn->query($updateBook);
 
-                                    echo '<div class="bg-success text-white p-3 mt-3">Rental complete.</div>';
-                            }
-                            else
-                            {
-                                    echo '<div class="bg-danger text-white p-3">
-                                        The borrower with ID '.$_POST['borrowerID'].' already rented a book with ID '.$book.' on '.$_POST['rentDate'].'.
-                                        <br>
-                                        A borrower is not allowed to rent the same books on the same date.
-                                        </div>';
-                            }
-                        }
-                        else
-                        {
-                            echo '<div class="bg-danger text-white p-3">Book to be rented is unavailable.</div>';
-                        }
+                    // borrower and book ident
+                    $infoSql = "select fName, lName, title, pubYear 
+                                from BOOK, BORROWER, RENTAL 
+                                where 
+                                    RENTAL.bookID = BOOK.id and 
+                                    RENTAL.borrowerID = BORROWER.id and 
+                                    RENTAL.rentalDate = '$_POST[rentDate]' and
+                                    RENTAL.bookID = '$book' and 
+                                    RENTAL.borrowerID = '$_POST[borrowerID]'";
+                    $infoResult = $conn->query($infoSql);
+                    $info = $infoResult->fetch_assoc();
+                    $infoBorrower = $info['fName'].' '.$info['lName'];
+                    $infoBook = $info['title'].' ('.$info['pubYear'].')';
+
+
+                    if ($rentalResult)
+                    {                                    
+                            // subtract amount of the book from the BOOK table
+                            $newAmount = $bookAmount - 1;
+                            $updateBook = "update BOOK set amount = '$newAmount' where id = '$book'";
+                            $conn->query($updateBook);
+
+
+                            $text = 
+                                '<div class="bg-success text-white p-3 mt-3">
+                                    Rental complete.
+                                    <br>
+                                    Borrower '.$infoBorrower.' has rented a book '.$infoBook.' on '.$_POST['rentDate'].'. 
+                                </div>';
+                            $message .= $text;
 
                     }
+                    else
+                    {
+                            $text = 
+                               '<div class="bg-danger text-white p-3">
+                                    Borrower '.$infoBorrower.' already rented a book '.$infoBook.' on '.$_POST['rentDate'].'.
+                                    <br>
+                                    A borrower is not allowed to rent the same books on the same date.
+                                </div>';
+                            $message .= $text;
+                    }
                 }
-                catch (Exception $e)
+                else
                 {
-                    echo '<div class="bg-danger text-white p-3">There was a problem adding a rental. Try again.</div>';
+                    $text = '<div class="bg-danger text-white p-3">Book to be rented is unavailable.</div>';
+                    $message .= $text;
                 }
-            } 
-            else 
-            {
-                echo '<div class="bg-danger text-white p-3">A required data is needed.</div>';
             }
-        ?>
+        }
+        catch (Exception $e)
+        {
+            $text = '<div class="bg-danger text-white p-3">There was a problem adding a rental. Try again.</div>';
+            $message .= $text;
+        }
 
-    </main>
-</div>
-
-
-
-
-
-
-<?php
-    $footer = new Footer();
-    $footer->addScript('../js/site.js');
-    $footer->drawFooter();
+        $_SESSION['message'] = $message;
+        header('Location: ../view/rent-confirmation.php');
+    } 
+    else 
+    {
+        $_SESSION['error'] = 'A required data is needed.';
+        header('Location: ../create/rental.php');
+    }
 ?>

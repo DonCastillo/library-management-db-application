@@ -16,6 +16,17 @@
         <h1>Rent a Book</h1>
         <hr>
 
+
+        <?php
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+            
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+        ?>
+        
+
         <!--borrower-->
         <div class="mb-4" data-page="1">
             <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Borrower Identification</h3>
