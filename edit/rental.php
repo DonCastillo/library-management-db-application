@@ -26,6 +26,18 @@
                 exit;
             }
 
+
+            // session
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+
+            
+
+            // rental info
             if( (isset($_GET['borrower']) && $_GET['borrower']) && 
                 (isset($_GET['book']) && $_GET['book']) && 
                 (isset($_GET['rental']) && $_GET['rental']))

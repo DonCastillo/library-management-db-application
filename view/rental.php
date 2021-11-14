@@ -35,6 +35,18 @@
                 exit;
             }
 
+
+
+            // success message
+            if (isset($_SESSION['success']) && $_SESSION['success']) {
+            echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+
+
+            // view rental info
             if ( (isset($_GET['borrower']) && $_GET['borrower']) && 
                  (isset($_GET['book']) && $_GET['book']) && 
                  (isset($_GET['rental']) && $_GET['rental']) )

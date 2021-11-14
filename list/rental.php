@@ -17,6 +17,22 @@
         <h1>Unreturned Book</h1>
         <hr>
 
+        <?php
+
+            // session
+            if (isset($_SESSION['error']) && $_SESSION['error']) {
+                echo '<div class="bg-danger text-white p-3 mb-5">'.$_SESSION['error'].'</div>';
+            }
+
+            if (isset($_SESSION['success']) && $_SESSION['success']) {
+                echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+            }
+
+            unset($_SESSION['error']);
+            unset($_SESSION['success']);
+            
+        ?>
+
         <div class="form-group mb-4">
             <label for="search-unreturned" class="mb-2">Filter Unreturned Books by Borrower ID, Borrower Last Name, or Rental Date (YYYY-MM-DD).</label>
             <input type="text" class="form-control" id="search-unreturned" name="search-unreturned" placeholder="" onkeyup="showRentals(this.value)">
