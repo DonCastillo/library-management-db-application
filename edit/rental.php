@@ -106,7 +106,7 @@
                 echo '    <div class="d-none" data-current-book="'.$info['bookID'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-books" class="mb-2">Search by Book ID or Title</label>';
-                echo '        <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" value="" onkeyup="showBooks(this.value, '.$bookRow['id'].')">';
+                echo '        <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" value="" onkeyup="showBooks(this.value, '.$info['bookID'].')">';
                 echo '    </div>';
                 echo '    <div id="book-results" class="ajax-results bg-light"></div>';
                 echo '    <h4>PREVIOUS BOOK</h4>';

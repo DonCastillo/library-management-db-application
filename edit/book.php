@@ -144,7 +144,12 @@
                     /** num copies *****************************************************************************************************************************************************/
                     echo '<div class="form-group mb-4">';
                     echo '    <label for="amount" class="mb-2">Number of Total Copies</label>';
-                    echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'] + $minAmtBook.'" maxlength="2" min="'.$minAmtBook.'" max="25">';
+                    $disabled = '';
+                    if ($minAmtBook > 0) {
+                        echo '    <small class="d-block">There are <strong>'.$minAmtBook.'</strong> copies being rented. You cannot change the number of copies of this book.</small>';
+                        $disabled = 'disabled';
+                    } 
+                    echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'] + $minAmtBook.'" maxlength="2" min="0" max="25" '.$disabled.'>';
                     echo '</div>';
                     /** num copies *****************************************************************************************************************************************************/
 

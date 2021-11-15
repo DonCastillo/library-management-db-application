@@ -14,7 +14,7 @@
 
 <div class="right p-5">
     <main>
-        <h1>Home</h1>
+        <h1>List of Genres</h1>
         <hr>
 
         <?php

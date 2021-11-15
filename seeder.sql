@@ -27,7 +27,7 @@ create table AUTHOR(
     primary key (id)
 );
 
-insert into AUTHOR values
+/* insert into AUTHOR values
 (1, 'J.K.', 'Rowling'),
 (2, 'J.R.R.', 'Tolkien'),
 (3, 'Leo', 'Tolstoy'),
@@ -47,7 +47,7 @@ insert into AUTHOR values
 (17, 'Margaret', 'Atwood'),
 (18, 'Khaled', 'Hosseini'),
 (19, 'John', 'Green'),
-(20, 'Cormac', 'McCarthy');
+(20, 'Cormac', 'McCarthy'); */
 #-----------------------------
 # AUTHOR
 #-----------------------------
@@ -64,7 +64,7 @@ create table BOOK(
     primary key (id)
 );
 
-insert into BOOK values
+/* insert into BOOK values
 (1, 'Dark Matter', 2016, 1),
 (2, 'Harry Potter and the Philosopher\'s Stone', 1997, 4),
 (3, 'Harry Potter and the Chamber of Secrets', 1998, 5),
@@ -75,7 +75,7 @@ insert into BOOK values
 (8, 'Harry Potter and the Deathly Hallows', 2007, 1),
 (9, 'The Girl With the Dragon Tattoo', 2005, 1),
 (10, 'The Girl Who Kicked the Hornet\'s Nest', 2006, 9),
-(11, 'The Girl Who Played With Fire', 2007, 1);
+(11, 'The Girl Who Played With Fire', 2007, 1); */
 #-----------------------------
 # BOOK
 #-----------------------------
@@ -96,7 +96,7 @@ create table WRITES(
     primary key (authorID, bookID)
 );
 
-insert into WRITES values
+/* insert into WRITES values
 (1, 2),
 (2, 2),
 (1, 3),
@@ -107,7 +107,7 @@ insert into WRITES values
 (1, 8),
 (7, 9),
 (7, 10),
-(7, 11);
+(7, 11); */
 #-----------------------------
 # WRITES
 #-----------------------------
@@ -121,7 +121,7 @@ create table GENRE(
     primary key (name)
 );
 
-insert into GENRE values
+/* insert into GENRE values
 ('fantasy'),
 ('crime'),
 ('biography'),
@@ -130,7 +130,7 @@ insert into GENRE values
 ('romance'),
 ('horror'),
 ('mystery'),
-('thriller');
+('thriller'); */
 #-----------------------------
 # GENRE
 #-----------------------------
@@ -151,7 +151,7 @@ create table ASSIGNS(
     primary key (genreName, bookID)
 );
 
-insert into ASSIGNS values
+/* insert into ASSIGNS values
 ('fantasy', 1),
 ('fantasy', 2),
 ('romance', 3),
@@ -164,7 +164,7 @@ insert into ASSIGNS values
 ('fantasy', 7),
 ('crime', 8),
 ('horror', 9),
-('fantasy', 9);
+('fantasy', 9); */
 #-----------------------------
 # ASSIGNS
 #-----------------------------
@@ -186,10 +186,10 @@ create table BORROWER(
     primary key (id)
 );
 
-insert into BORROWER values
+/* insert into BORROWER values
 (1, 'Michael', 'Scott', 'michael.scott@dunder.ca', '123-4567', '123', 'Lethbridge', 'AB', 'A1B2C3'),
 (2, 'Dwight', 'Schrute', 'dwight.shrute@dunder.ca', '456-4444', 'Unit 3, 45 St.', 'Lethbridge', 'AB', '122ABB'),
-(3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG');
+(3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG'); */
 #-----------------------------
 # BORROWER
 #-----------------------------
@@ -212,10 +212,10 @@ create table RENTAL(
     primary key (bookID, borrowerID, rentalDate)
 );
 
-insert into RENTAL values
+/* insert into RENTAL values
 (1, 1, '2021-10-08', '2021-10-15'),
 (2, 1, '2021-10-08', '2021-10-15'),
-(1, 2, '2021-10-08', '2021-10-15');
+(1, 2, '2021-10-08', '2021-10-15'); */
 #-----------------------------
 # RENTAL
 #-----------------------------

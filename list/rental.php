@@ -14,7 +14,7 @@
 
 <div class="right p-5">
     <main>
-        <h1>Unreturned Book</h1>
+        <h1>Unreturned Books</h1>
         <hr>
 
         <?php

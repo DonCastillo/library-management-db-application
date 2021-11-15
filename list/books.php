@@ -13,7 +13,7 @@
    
 <div class="right p-5">
     <main>
-        <h1>Home</h1>
+        <h1>List of Books</h1>
         <hr>
 
         <?php
@@ -77,10 +77,24 @@
                     $amtBookRentedResult = $conn->query($amtBookRentedSql);
                     $amtRented =  $amtBookRentedResult->fetch_assoc()['amount'];
 
+                    $authorSql = "select fName, lName 
+                                  from AUTHOR 
+                                  join WRITES 
+                                  where AUTHOR.id = WRITES.authorID and
+                                        WRITES.bookID = '$row[id]'";
+
+                    $authorResult = $conn->query($authorSql);
+                    $authors = [];
+
+                    while ($authorRow = $authorResult->fetch_assoc()) {
+                        array_push($authors, $authorRow['fName'].' '.$authorRow['lName']);
+                    }
+                    $authors = implode(', ', $authors);
+
 
                     echo '<tr>';
                     echo '<td class="col">'.$row['title'].'</td>'; 
-                    echo '<td class="col">'.$row['authorNames'].'</td>'; 
+                    echo '<td class="col">'.$authors.'</td>'; 
                     echo '<td class="col">'.$row['pubYear'].'</td>'; 
                     echo '<td class="col">'.$row['amount'].'</td>'; 
                     echo '<td class="col">'.$amtRented.'</td>'; 

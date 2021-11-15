@@ -13,7 +13,7 @@
 
 <div class="right p-5">
     <main>
-        <h1>Borrowers</h1>
+        <h1>List of Borrowers</h1>
         <hr>
 
         <?php
