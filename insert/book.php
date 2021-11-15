@@ -12,7 +12,7 @@
     {
         try 
         {
-            $title = addslashes($_POST['title']);
+            $title = addslashes( $_POST['title'] );
             $sql = "insert into BOOK (title, pubYear, amount) 
                     values ('$title', '$_POST[pubYear]', '$_POST[amount]')";
 

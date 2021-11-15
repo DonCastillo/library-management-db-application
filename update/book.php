@@ -12,7 +12,7 @@
     {
 
         $bookID = $_POST['id'];
-        $bookTitle = addslashes($_POST['title']);
+        $bookTitle = addslashes( $_POST['title'] );
 
         $bookSql = "update BOOK 
                     set title = '$bookTitle',
