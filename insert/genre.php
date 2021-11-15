@@ -4,8 +4,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
-        exit();
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../create/genre.php');
     }
 
     if ( isset($_POST['genre']) && $_POST['genre'] ) 
@@ -25,8 +25,13 @@
             if ($err == 1062)
             {
                 $_SESSION['error'] = 'A genre with the same name already exists.';
-                header('Location: ../create/genre.php');
             }
+            else
+            {
+                $_SESSION['error'] = 'Adding a genre failed.';
+            }
+
+            header('Location: ../create/genre.php');
         }
     } 
     else 

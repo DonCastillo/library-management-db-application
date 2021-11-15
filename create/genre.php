@@ -26,7 +26,7 @@
 
         <form action="../insert/genre.php" method="post">
             <div class="form-group mb-4">
-                <label for="genre" class="mb-2">Name</label>
+                <label for="genre" class="mb-2 required">Name</label>
                 <input type="text" class="form-control" id="genre" name="genre" placeholder="Adventure" maxlength="35" required>
             </div>
              <div class="form-group mb-4">

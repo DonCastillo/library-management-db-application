@@ -6,7 +6,6 @@
     {
         $_SESSION['error'] = 'Connection error!';
         header('Location: ../list/authors.php');
-        exit;
     }
 
     if ( isset($_GET['id']) && $_GET['id'] ) 

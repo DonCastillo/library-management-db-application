@@ -4,3 +4,10 @@ AUTHOR
     view            DONE 
     edit/update     DONE
     delete          DONE
+
+GENRES
+    create/insert   DONE
+    list            DONE
+    view            DONE
+    edit/update     DONE
+    delete          

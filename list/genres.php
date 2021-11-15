@@ -21,7 +21,7 @@
 
             if ($conn->connect_errno)
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
 
@@ -43,7 +43,7 @@
 
             if (!$result)
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
             else if ($result->num_rows > 0)

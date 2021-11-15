@@ -4,8 +4,8 @@
 
     if ($conn->connect_errno)
     {
-        echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
-        exit();
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../list/genres.php');
     }
 
     if ( isset($_GET['name']) && $_GET['name'] )
