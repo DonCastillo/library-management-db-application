@@ -4,8 +4,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../edit/rental.php?borrower='.$_POST['form-old-borrower'].'&book='.$_POST['form-old-book'].'&rental='.$_POST['form-old-rentalDate']);
     }
 
     $proceed = (isset($_POST['form-old-borrower']) && $_POST['form-old-borrower']) && 

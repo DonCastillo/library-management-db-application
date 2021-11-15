@@ -31,7 +31,7 @@
 
             if ($conn->connect_errno) 
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
 
@@ -39,7 +39,7 @@
 
             // success message
             if (isset($_SESSION['success']) && $_SESSION['success']) {
-            echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
+                echo '<div class="bg-success text-white p-3 mb-5">'.$_SESSION['success'].'</div>';
             }
 
             unset($_SESSION['error']);
@@ -63,26 +63,25 @@
 
                 if ($result->num_rows > 0)
                 {
-                    $borrowerSql = "select * from BORROWER where id = '$borrowerID'";
-                    $bookSql = "select * from BOOK where id = '$bookID'";
+                    $infoSql = "select bookID, borrowerID, rentalDate, dueDate, title, pubYear, 
+                                       fName, lName, email, phone, street, city, prov, postalCode
+                                from BOOK, BORROWER, RENTAL 
+                                where RENTAL.bookID = BOOK.id and 
+                                    RENTAL.borrowerID = BORROWER.id and 
+                                    RENTAL.borrowerID = '$borrowerID' and 
+                                    RENTAL.bookID = '$bookID' and 
+                                    RENTAL.rentalDate = '$rentalDate'";
+
                     $authorSql = "select AUTHOR.lName 
                                   from WRITES 
                                   join AUTHOR 
                                   where AUTHOR.id = WRITES.authorID and 
                                         WRITES.bookID = '$bookID'";
-                    $rentalSql = "select * from RENTAL
-                                  where bookID = '$bookID' and 
-                                        borrowerID = '$borrowerID' and
-                                        rentalDate = '$rentalDate'";
-
-                    $borrowerResult = $conn->query($borrowerSql);
-                    $bookResult = $conn->query($bookSql);
+            
+                    $infoResult = $conn->query($infoSql);
                     $authorResult = $conn->query($authorSql);
-                    $rentalResult = $conn->query($rentalSql);
 
-                    $borrowerRow = $borrowerResult->fetch_assoc();
-                    $bookRow = $bookResult->fetch_assoc();
-                    $rentalRow = $rentalResult->fetch_assoc();
+                    $info = $infoResult->fetch_assoc();
                     
 
                     $authors = [];
@@ -100,10 +99,10 @@
                     
                     echo '<tr>';
                     echo '<td class="col-12">';
-                    echo $borrowerRow['fName'].' '.$borrowerRow['lName'].'<br>';
-                    echo $borrowerRow['email'].'<br>';
-                    echo $borrowerRow['phone'].'<br><br>';
-                    echo $borrowerRow['street'].' '.$borrowerRow['city'].' '.$borrowerRow['prov'].'<br>'.$borrowerRow['postalCode'];
+                    echo $info['fName'].' '.$info['lName'].'<br>';
+                    echo $info['email'].'<br>';
+                    echo $info['phone'].'<br><br>';
+                    echo $info['street'].' '.$info['city'].' '.$info['prov'].'<br>'.$info['postalCode'];
                     echo '</td>';
                     echo '</tr>';
 
@@ -119,7 +118,7 @@
                     echo '</tr>';
                     
                     echo '<tr>';
-                    echo '<td class="col-12">'.$bookRow['title'].' ('.$bookRow['pubYear'].')<br>'.implode(', ', $authors).'</td>';
+                    echo '<td class="col-12">'.$info['title'].' ('.$info['pubYear'].')<br>'.implode(', ', $authors).'</td>';
                     echo '</tr>';
 
                     echo '</table>';
@@ -134,7 +133,7 @@
                     echo '</tr>';
                     
                     echo '<tr>';
-                    echo '<td class="col-12" id="rentalDate-raw">'.$rentalRow['rentalDate'].'</td>';
+                    echo '<td class="col-12" id="rentalDate-raw">'.$info['rentalDate'].'</td>';
                     echo '</tr>';
 
                     echo '</table>';
@@ -148,7 +147,7 @@
                      echo '</tr>';
                      
                      echo '<tr>';
-                     echo '<td class="col-12" id="dueDate-raw">'.$rentalRow['dueDate'].'</td>';
+                     echo '<td class="col-12" id="dueDate-raw">'.$info['dueDate'].'</td>';
                      echo '</tr>';
  
                      echo '</table>';
@@ -171,7 +170,7 @@
                       if ( isset($_GET['view']) && $_GET['view'] == "delete" )
                       {
                             /** Delete Button ******************************************************/
-                            echo '<a class="btn btn-danger mt-5 w-100" href="../delete/rental.php?borrower='.$rentalRow['borrowerID'].'&book='.$rentalRow['bookID'].'&rental='.$rentalRow['rentalDate'].'">Return Book</a>';
+                            echo '<a class="btn btn-danger mt-5 w-100" href="../delete/rental.php?borrower='.$info['borrowerID'].'&book='.$info['bookID'].'&rental='.$info['rentalDate'].'">Return Book</a>';
                             /** Delete Button ******************************************************/
                       }
                 } 
@@ -183,7 +182,7 @@
             }
             else 
             {
-                echo '<div class="bg-danger text-white p-3">A required data is needed. Check the url.</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">A required data is needed. Check the url.</div>';
             }
 
            

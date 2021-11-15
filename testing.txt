@@ -29,3 +29,11 @@ BORROWER
     edit/update     DONE
     delete          DONE
     name (sanitize) DONE
+
+RENTAL
+    create/insert   DONE
+    list            DONE
+    view            DONE
+    edit/update     DONE
+    delete          DONE
+    name (sanitize) DONE

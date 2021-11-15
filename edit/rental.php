@@ -22,7 +22,7 @@
 
             if ($conn->connect_errno) 
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
 
@@ -48,20 +48,22 @@
                 $rentalDate = $_GET['rental'];
 
 
-                $borrowerSql = "select * from BORROWER where id = '$borrower'";
-                $bookSql = "select * from BOOK where id = '$book'";
+                $infoSql = "select bookID, borrowerID, rentalDate, dueDate, title, pubYear, 
+                                    fName, lName, email, phone, street, city, prov, postalCode
+                            from BOOK, BORROWER, RENTAL 
+                            where RENTAL.bookID = BOOK.id and 
+                                RENTAL.borrowerID = BORROWER.id and 
+                                RENTAL.borrowerID = '$borrower' and 
+                                RENTAL.bookID = '$book' and 
+                                RENTAL.rentalDate = '$rentalDate'";
+
+
                 $authorSql = "select lName from AUTHOR join WRITES where AUTHOR.id = WRITES.authorID and WRITES.bookID = '$book'";
-                $rentalSql = "select * from RENTAL where bookID = '$book' and borrowerID = '$borrower' and rentalDate = '$rentalDate'";
 
-                $borrowerResult = $conn->query($borrowerSql);
-                $bookResult = $conn->query($bookSql);
+                $infoResult = $conn->query($infoSql);
                 $authorResult = $conn->query($authorSql);
-                $rentalResult = $conn->query($rentalSql);
 
-
-                $borrowerRow = $borrowerResult->fetch_assoc();
-                $bookRow = $bookResult->fetch_assoc();
-                $rentalRow = $rentalResult->fetch_assoc();
+                $info = $infoResult->fetch_assoc();
                 
                 $authors = [];
                 while ($authorRow = $authorResult->fetch_assoc()) {
@@ -71,24 +73,24 @@
                 /** Borrower ***************************************************/
                 echo '<div class="mb-4" data-page="1">';
                 echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Borrower Identification</h3>';
-                echo '    <div class="d-none" data-current-borrower="'.$borrowerRow['id'].'"></div>';
+                echo '    <div class="d-none" data-current-borrower="'.$info['borrowerID'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-borrowers" class="mb-2">Search by Borrower ID, Last Name, or Email (select only one)</label>';
-                echo '        <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" value="" onkeyup="showBorrowers(this.value, '.$borrowerRow['id'].')">';
+                echo '        <input type="text" class="form-control" id="search-borrowers" name="search-borrowers" placeholder="" value="" onkeyup="showBorrowers(this.value, '.$info['borrowerID'].')">';
                 echo '    </div>';
                 echo '    <div id="borrower-results" class="ajax-results bg-light"></div>';
                 echo '    <h4>PREVIOUS BORROWER</h4>';
                 echo '    <div id="previous-borrower" class="my-4 select-box bg-light position-relative"></div>';
                 echo '    <h4>CURRENT BORROWER</h4>';
                 echo '    <div id="selected-borrower" class="my-4 select-box bg-light position-relative">';
-                echo '        <div class="p-4 border border-success" data-borrower="'.$borrowerRow['id'].'">';
+                echo '        <div class="p-4 border border-success" data-borrower="'.$info['borrowerID'].'">';
                 echo '              <div class="close close-borrower"><i class="fas fa-times"></i></div>';
-                echo '              <div><strong>ID:</strong> '.$borrowerRow['id'].'</div>';
-                echo '              <div>'.$borrowerRow['fName'].' '.$borrowerRow['lName'].'</div>';
-                echo '              <div>'.$borrowerRow['email'].'</div>';
-                echo '              <div>'.$borrowerRow['phone'].'</div>';
-                echo '              <div>'.$borrowerRow['street'].' '.$borrowerRow['city'].' '.$borrowerRow['prov'].'</div>';
-                echo '              <div>'.$borrowerRow['postalCode'].'</div>';
+                echo '              <div><strong>ID:</strong> '.$info['borrowerID'].'</div>';
+                echo '              <div>'.$info['fName'].' '.$info['lName'].'</div>';
+                echo '              <div>'.$info['email'].'</div>';
+                echo '              <div>'.$info['phone'].'</div>';
+                echo '              <div>'.$info['street'].' '.$info['city'].' '.$info['prov'].'</div>';
+                echo '              <div>'.$info['postalCode'].'</div>';
                 echo '        </div>';
                 echo '    </div>';
                 echo '    <div class="my-4 d-flex justify-content-end">';
@@ -101,7 +103,7 @@
                 /** Book ***************************************************/
                 echo '<div class="mb-4 d-none" data-page="2">';
                 echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Book to Borrow</h3>';
-                echo '    <div class="d-none" data-current-book="'.$bookRow['id'].'"></div>';
+                echo '    <div class="d-none" data-current-book="'.$info['bookID'].'"></div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="search-books" class="mb-2">Search by Book ID or Title</label>';
                 echo '        <input type="text" class="form-control" id="search-books" name="search-books" placeholder="" value="" onkeyup="showBooks(this.value, '.$bookRow['id'].')">';
@@ -111,10 +113,10 @@
                 echo '    <div id="previous-book" class="my-4 select-box bg-light position-relative"></div>';
                 echo '    <h4>CURRENT BOOK</h4>';
                 echo '    <div id="selected-book" class="my-4 select-box bg-light position-relative">';
-                echo '          <div class="p-4 border border-success position-relative" data-book="'.$bookRow['id'].'">';
+                echo '          <div class="p-4 border border-success position-relative" data-book="'.$info['bookID'].'">';
                 echo '          <div class="close close-book"><i class="fas fa-times"></i></div>';
-                echo '          <div><strong>ID:</strong> '.$bookRow['id'].'</div>';
-                echo '          <div>'.$bookRow['title'].' ('.$bookRow['pubYear'].')</div>';
+                echo '          <div><strong>ID:</strong> '.$info['bookID'].'</div>';
+                echo '          <div>'.$info['title'].' ('.$info['pubYear'].')</div>';
                 echo '          <div>by '.implode(', ', $authors).'</div>';
                 echo '          </div>';
                 echo '    </div>';
@@ -130,11 +132,11 @@
                 echo '    <h3 class="text-center fw-bold bg-dark text-white mt-3 p-3">Dates</h3>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="rentalDate" class="mb-2">Rental Date</label>';
-                echo '        <input type="date" class="form-control" name="rentalDate" id="rentalDate" value="'.$rentalRow['rentalDate'].'" onchange="changeDueDate(this.value)">';
+                echo '        <input type="date" class="form-control" name="rentalDate" id="rentalDate" value="'.$info['rentalDate'].'" onchange="changeDueDate(this.value)">';
                 echo '    </div>';
                 echo '    <div class="form-group mb-4">';
                 echo '        <label for="dueDate" class="mb-2">Due Date</label>';
-                echo '        <input type="date" class="form-control" name="dueDate" id="dueDate" value="'.$rentalRow['dueDate'].'">';
+                echo '        <input type="date" class="form-control" name="dueDate" id="dueDate" value="'.$info['dueDate'].'">';
                 echo '    </div>';
                 echo '    <div id="date-error" class="p-3 text-white bg-danger d-none"></div>';
                 echo '    <div class="my-4 d-flex justify-content-between">';
@@ -199,13 +201,13 @@
 
                     /** Form ***********************************************************/
                     echo '      <form method="POST" action="../update/rental.php">';
-                    echo '      <input type="hidden" name="form-old-borrower" value="'.$rentalRow['borrowerID'].'">';
+                    echo '      <input type="hidden" name="form-old-borrower" value="'.$info['borrowerID'].'">';
                     echo '      <input type="hidden" name="form-new-borrower" value="">';
-                    echo '      <input type="hidden" name="form-old-book" value="'.$rentalRow['bookID'].'">';
+                    echo '      <input type="hidden" name="form-old-book" value="'.$info['bookID'].'">';
                     echo '      <input type="hidden" name="form-new-book" value="">';
-                    echo '      <input type="hidden" name="form-old-rentalDate" value="'.$rentalRow['rentalDate'].'">';
+                    echo '      <input type="hidden" name="form-old-rentalDate" value="'.$info['rentalDate'].'">';
                     echo '      <input type="hidden" name="form-new-rentalDate" value="">';
-                    echo '      <input type="hidden" name="form-old-dueDate" value="'.$rentalRow['dueDate'].'">';
+                    echo '      <input type="hidden" name="form-old-dueDate" value="'.$info['dueDate'].'">';
                     echo '      <input type="hidden" name="form-new-dueDate" value="">';
                     echo '      <input type="submit" class="form-control btn btn-primary" value="Update Rent">';
                     echo '      </form>';
@@ -220,7 +222,7 @@
             }
             else
             {
-                echo '<div class="bg-danger text-white p-3">A required data is needed. Check the url.</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">A required data is needed. Check the url.</div>';
             }
 
         ?>

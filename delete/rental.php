@@ -5,8 +5,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../list/rental.php');
     }
 
     $proceed = (isset($_GET['borrower']) && $_GET['borrower']) && 
