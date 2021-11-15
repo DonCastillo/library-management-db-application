@@ -5,8 +5,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../create/author.php');
     }
 
     if ( isset($_POST['lName']) && $_POST['lName'] ) 
@@ -25,8 +25,13 @@
             if ($err == 1062)
             {
                 $_SESSION['error'] = 'An author with the same first name and last name already exists.';
-                header('Location: ../create/author.php');
             }
+            else
+            {
+                $_SESSION['error'] = 'Adding an author failed';
+            }
+
+            header('Location: ../create/author.php');
         }
     } 
     else 

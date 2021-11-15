@@ -20,7 +20,7 @@
 
             if ($conn->connect_errno) 
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
 
@@ -44,10 +44,12 @@
                               from AUTHOR 
                               where id = $id";
 
-                $bookSql = "select BOOK.title, BOOK.pubYear
+                $bookSql = "select title, pubYear
                             from WRITES
                             join BOOK
-                            where WRITES.bookID = BOOK.id and WRITES.authorID = $id";
+                            where WRITES.bookID = BOOK.id and 
+                                  WRITES.authorID = $id
+                            order by title asc";
 
 
                 $bookResult = $conn->query($bookSql);

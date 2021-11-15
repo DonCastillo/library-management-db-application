@@ -4,7 +4,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../list/authors.php');
         exit;
     }
 

@@ -30,7 +30,7 @@
                 <input type="text" class="form-control" id="fName" name="fName" placeholder="John" maxlength="35">
             </div>
             <div class="form-group mb-4">
-                <label for="lName" class="mb-2">Last Name</label>
+                <label for="lName" class="mb-2 required">Last Name</label>
                 <input type="text" class="form-control" id="lName" name="lName" placeholder="Smith" maxlength="45" required>
             </div>
              <div class="form-group mb-4">
