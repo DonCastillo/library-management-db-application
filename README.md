@@ -22,29 +22,28 @@ Head part of the pages
 Footer part of the pages
 
 **create/**  
-Contains all the pages with forms to insert a row into the DB
-
-**read/**  
-Contains all the pages to view a record from the DB
-
-**edit/**  
-Contains all the pages with forms to edit a record from the DB
-
-**list/**  
-Contains all the pages to list all records from the DB
+Contains all the pages with forms to create a new record
 
 **insert/**  
 DB insert handler
 
-**delete/**  
-DB delete handler  
+**list/**  
+Contains all the pages to list all records of each entity
 
-**update/**  
-DB update handler  
+**view**
+Individual pages to view a record of an entity
 
+**edit**
+Contains all pages to edit a record in a form
 
+**update**
+DB update handler
 
+**delete**  
+DB delete handler
 
+**ajax**
+Pages whose data will be displayed onto the page via ajax
 
 
 
