@@ -143,7 +143,7 @@
                     
                     /** num copies *****************************************************************************************************************************************************/
                     echo '<div class="form-group mb-4">';
-                    echo '    <label for="amount" class="mb-2">Number of Copies</label>';
+                    echo '    <label for="amount" class="mb-2">Number of Total Copies</label>';
                     echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'] + $minAmtBook.'" maxlength="2" min="'.$minAmtBook.'" max="25">';
                     echo '</div>';
                     /** num copies *****************************************************************************************************************************************************/
