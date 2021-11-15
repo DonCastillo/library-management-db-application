@@ -10,7 +10,7 @@
 
     if ( isset($_POST['genre']) && $_POST['genre'] ) 
     {
-        $genre = strtolower($_POST['genre']);
+        $genre = addslashes( strtolower($_POST['genre']) );
         $sql = "insert into GENRE (name) values ('$genre')";
         $result = $conn->query($sql);
 

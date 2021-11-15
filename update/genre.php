@@ -11,8 +11,10 @@
     if ( (isset($_POST['oldGenre']) && $_POST['oldGenre']) && 
             (isset($_POST['newGenre']) && $_POST['newGenre']) )
     {
+        $newGenre = addslashes( strtolower($_POST['newGenre']) );  
+
         $sql = "update GENRE
-                set name = '$_POST[newGenre]'
+                set name = '$newGenre'
                 where name = '$_POST[oldGenre]'";
 
         $result = $conn->query($sql);
