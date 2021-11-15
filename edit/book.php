@@ -137,10 +137,14 @@
                     /** pub year *******************************************************************************************************************************************************/
 
 
+                    $minAmtBookSql = "select count(*) as amount from RENTAL where bookID = '$id'";
+                    $minAmtBookResult = $conn->query($minAmtBookSql);
+                    $minAmtBook =  $minAmtBookResult->fetch_assoc()['amount'];
+                    
                     /** num copies *****************************************************************************************************************************************************/
                     echo '<div class="form-group mb-4">';
                     echo '    <label for="amount" class="mb-2">Number of Copies</label>';
-                    echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'].'" maxlength="2" min="0" max="25">';
+                    echo '    <input type="number" class="form-control" id="amount" name="amount" placeholder="" value="'.$bookRow['amount'] + $minAmtBook.'" maxlength="2" min="'.$minAmtBook.'" max="25">';
                     echo '</div>';
                     /** num copies *****************************************************************************************************************************************************/
 

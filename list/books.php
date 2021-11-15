@@ -61,22 +61,30 @@
                 echo '<table class="table table-striped">';
                 echo '<thead>';
                 echo '<tr>';
-                echo '<th scope="col-3">Title</th>';
-                echo '<th scope="col-3">Author(s)</th>';
-                echo '<th scope="col-2">Year Published</th>';
-                echo '<th scope="col-2">Copies</th>';
-                echo '<th scope="col-2">Action</th>';
+                echo '<th scope="col">Title</th>';
+                echo '<th scope="col">Author(s)</th>';
+                echo '<th scope="col">Year Published</th>';
+                echo '<th scope="col">Available Copies</th>';
+                echo '<th scope="col">Rented Copies</th>';
+                echo '<th scope="col">Action</th>';
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>';
 
                 while($row = $result->fetch_assoc()) {
+
+                    $amtBookRentedSql = "select count(*) as amount from RENTAL where bookID = '$row[id]'";
+                    $amtBookRentedResult = $conn->query($amtBookRentedSql);
+                    $amtRented =  $amtBookRentedResult->fetch_assoc()['amount'];
+
+
                     echo '<tr>';
-                    echo '<td class="col-3">'.$row['title'].'</td>'; 
-                    echo '<td class="col-3">'.$row['authorNames'].'</td>'; 
-                    echo '<td class="col-2">'.$row['pubYear'].'</td>'; 
-                    echo '<td class="col-2">'.$row['amount'].'</td>'; 
-                    echo '<td class="col-2">';
+                    echo '<td class="col">'.$row['title'].'</td>'; 
+                    echo '<td class="col">'.$row['authorNames'].'</td>'; 
+                    echo '<td class="col">'.$row['pubYear'].'</td>'; 
+                    echo '<td class="col">'.$row['amount'].'</td>'; 
+                    echo '<td class="col">'.$amtRented.'</td>'; 
+                    echo '<td class="col">';
                     echo '<a title="Update" class="mx-1 my-1 p-1 btn btn-primary" href="../view/book.php?id='.$row['id'].'"><i class="fas fa-eye"></i>';
                     echo '<a title="Edit" class="mx-1 my-1 p-1 btn btn-success" href="../edit/book.php?id='.$row['id'].'"><i class="fas fa-edit"></i></a>';
                     echo '<a title="Delete" class="mx-1 my-1 p-1 btn btn-danger" href="../delete/book.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a>';
