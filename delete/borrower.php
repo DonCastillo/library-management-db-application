@@ -4,8 +4,8 @@
 
     if ($conn->connect_errno)
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../list/borrowers.php');
     }
 
     if ( isset($_GET['id']) && $_GET['id'] )
@@ -23,11 +23,11 @@
             $err = $conn->errno;
             if($err == 1451) {
                 $_SESSION['error'] = 'This borrower is currently renting a book. Borrower deletion failed.';
-                header('Location: ../list/borrowers.php');
             } else {
                 $_SESSION['error'] = 'Borrower deletion failed.';
-                header('Location: ../list/books.php');
             }
+
+            header('Location: ../list/borrowers.php');
         }
     }
     else

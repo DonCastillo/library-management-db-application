@@ -23,11 +23,11 @@
             $err = $conn->errno;
             if($err == 1451) {
                 $_SESSION['error'] = 'This book is currently being rented. Book deletion failed.';
-                header('Location: ../list/books.php');
             } else {
                 $_SESSION['error'] = 'Book deletion failed.';
-                header('Location: ../list/books.php');
             }
+
+            header('Location: ../list/books.php');
         }
     } 
     else 

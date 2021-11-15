@@ -4,18 +4,25 @@
 
     if ($conn->connect_errno)
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../create/borrower.php');
     }
 
     if ( (isset($_POST['lName']) && $_POST['lName']) && (isset($_POST['email']) && $_POST['email']) )
     {
         try
         {
+            $fName = addslashes( $_POST['fName'] );
+            $lName = addslashes( $_POST['lName'] );
+            $email = addslashes( $_POST['email'] );
+            $phone = addslashes( $_POST['phone'] );
+            $street = addslashes( $_POST['street'] );
+            $city = addslashes( $_POST['city'] );
+            $prov = addslashes( $_POST['prov'] );
+            $postalCode = addslashes( $_POST['postalCode'] );
+
             $sql = "insert into BORROWER (fName, lName, email, phone, street, city, prov, postalCode)
-                    values ('$_POST[fName]', '$_POST[lName]', '$_POST[email]',
-                            '$_POST[phone]', '$_POST[street]', '$_POST[city]',
-                            '$_POST[prov]', '$_POST[postalCode]')";
+                    values ('$fName', '$lName', '$email', '$phone', '$street', '$city', '$prov', '$postalCode')";
 
             $result = $conn->query($sql);
 
@@ -29,11 +36,15 @@
                 $err = $conn->errno;
                 if ($err == 1062)
                 {
-                    $_SESSION['error'] = 'A borrower with the same email already exists.';
-                    header('Location: ../create/borrower.php');
+                    $_SESSION['error'] = 'A borrower with the same email already exists.'; 
                 }
-                // $_SESSION['error'] = 'Adding a borrower failed.';
-                // header('Location: ../create/borrower.php');
+                else
+                {
+                    $_SESSION['error'] = 'Registering a borrower failed.'; 
+                }
+
+                header('Location: ../create/borrower.php');
+
             }
         }
         catch (Exception $e)

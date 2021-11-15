@@ -20,7 +20,7 @@
 
             if ($conn->connect_errno)
             {
-                echo '<div class="bg-danger text-white p-3">Connection error!</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">Connection error!</div>';
                 exit;
             }
 
@@ -149,7 +149,7 @@
             }
             else
             {
-                echo '<div class="bg-danger text-white p-3">A required data is needed. Check the url.</div>';
+                echo '<div class="bg-danger text-white p-3 mb-5">A required data is needed. Check the url.</div>';
             }
 
 
