@@ -11,7 +11,10 @@
 
     if ( isset($_POST['lName']) && $_POST['lName'] ) 
     {
-        $sql = "insert into AUTHOR (fName, lName) values ('$_POST[fName]', '$_POST[lName]')";
+        $fName = addslashes( $_POST['fName'] ); 
+        $lName = addslashes( $_POST['lName'] );
+
+        $sql = "insert into AUTHOR (fName, lName) values ('$fName', '$lName')";
         $result = $conn->query($sql);
 
         if($result)

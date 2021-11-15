@@ -4,6 +4,7 @@ AUTHOR
     view            DONE 
     edit/update     DONE
     delete          DONE
+    name (sanitize) DONE
 
 GENRES
     create/insert   DONE
@@ -11,6 +12,7 @@ GENRES
     view            DONE
     edit/update     DONE
     delete          DONE
+    name (sanitize) DONE
 
 BOOKS
     create/insert   DONE 
