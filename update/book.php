@@ -4,8 +4,8 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../edit/book.php?id='.$_POST['id']);
     }
 
     if ( isset($_POST['title']) && $_POST['title'] ) 

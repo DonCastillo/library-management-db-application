@@ -4,16 +4,17 @@
 
     if ($conn->connect_errno) 
     {
-        echo '<div class="bg-danger text-white p-3">Connection error!</div>';
-        exit;
+        $_SESSION['error'] = 'Connection error!';
+        header('Location: ../create/book.php');
     }
 
     if ( isset($_POST['title']) && $_POST['title'] ) 
     {
         try 
         {
+            $title = addslashes($_POST['title']);
             $sql = "insert into BOOK (title, pubYear, amount) 
-                    values ('$_POST[title]', '$_POST[pubYear]', '$_POST[amount]')";
+                    values ('$title', '$_POST[pubYear]', '$_POST[amount]')";
 
             $result = $conn->query($sql);
             $newBookID = $conn->insert_id; // id of the new book just inserted

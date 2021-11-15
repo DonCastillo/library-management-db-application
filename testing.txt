@@ -10,4 +10,11 @@ GENRES
     list            DONE
     view            DONE
     edit/update     DONE
-    delete          
+    delete          DONE
+
+BOOKS
+    create/insert   DONE 
+    list            DONE
+    view            DONE
+    edit/update     DONE
+    delete          DONE

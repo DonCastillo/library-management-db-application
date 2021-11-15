@@ -30,7 +30,7 @@
 
             <!--title-->
             <div class="form-group mb-4">
-                <label for="title" class="mb-2">Book Title</label>
+                <label for="title" class="mb-2 required">Book Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Alice in Wonderland" maxlength=100 required>
             </div>
             <!--title-->
