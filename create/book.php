@@ -80,7 +80,7 @@
              <!--pub year-->
             <div class="form-group mb-4">
                 <label for="pubYear" class="mb-2">Publication Year</label>
-                <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" maxlength="4" min="1500">
+                <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" maxlength="4" min="0" max="3000">
             </div>
              <!--pub year-->
 

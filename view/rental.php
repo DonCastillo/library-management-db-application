@@ -14,8 +14,6 @@
 
 <div class="right p-5">
     <main id="view-page">
-        <h1>View a Rental</h1>
-        <hr>
 
         <?php
             if ( isset($_GET['view']) && $_GET['view'] == "delete" ) {

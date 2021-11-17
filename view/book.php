@@ -56,10 +56,15 @@
                              join GENRE 
                              where ASSIGNS.genreName = GENRE.name and ASSIGNS.bookID = $id";
 
+                $rentedAmtSql = "select count(*) as amount from RENTAL where bookID = '$id'";
+
 
                 $bookResult = $conn->query($bookSql);
                 $authorResult = $conn->query($authorSql);
                 $genreResult = $conn->query($genreSql);
+                $rentedAmtResult = $conn->query($rentedAmtSql);
+
+                $rentedAmt = $rentedAmtResult->fetch_assoc()['amount'];
 
  
                 if ($bookResult->num_rows > 0)
@@ -98,9 +103,15 @@
                     echo '</tr>';
 
                     echo '<tr>';
-                    echo '<td class="col-3">Number of Copies</td>';
+                    echo '<td class="col-3">Number of Copies Available</td>';
                     echo '<td class="col-9">'.$bookRow['amount'].'</td>';
                     echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="col-3">Number of Rented Copies</td>';
+                    echo '<td class="col-9">'.$rentedAmt.'</td>';
+                    echo '</tr>';
+
                     echo '</table>';
 
                 } 

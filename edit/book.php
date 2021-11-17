@@ -132,7 +132,7 @@
                     /** pub year *******************************************************************************************************************************************************/
                     echo '<div class="form-group mb-4">';
                     echo '    <label for="pubYear" class="mb-2">Publication Year</label>';
-                    echo '    <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" value="'.$bookRow['pubYear'].'" maxlength="4" min="1500">';
+                    echo '    <input type="number" class="form-control" id="pubYear" name="pubYear" placeholder="1986" value="'.$bookRow['pubYear'].'" maxlength="4" min="0" max="3000">';
                     echo '</div>';
                     /** pub year *******************************************************************************************************************************************************/
 
