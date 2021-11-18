@@ -67,7 +67,7 @@ create table BOOK(
 );
 
 insert into BOOK values
-(1, 'Dark Matter', 2016, 1),
+(1, 'Dark Matter', 2016, 0),
 (2, 'Harry Potter and the Philosopher\'s Stone', 1997, 4),
 (3, 'Harry Potter and the Chamber of Secrets', 1998, 5),
 (4, 'Harry Potter and the Prisoner of Azkaban', 1999, 3),
@@ -191,7 +191,15 @@ create table BORROWER(
 insert into BORROWER values
 (1, 'Michael', 'Scott', 'michael.scott@dunder.ca', '123-4567', '123', 'Lethbridge', 'AB', 'A1B2C3'),
 (2, 'Dwight', 'Schrute', 'dwight.shrute@dunder.ca', '456-4444', 'Unit 3, 45 St.', 'Lethbridge', 'AB', '122ABB'),
-(3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG');
+(3, 'Jim', 'Halpert', 'jim.halpert@dunder.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG'),
+(4, 'Meredith', 'Palmer', 'meredith.palmer@dunder.ca', '1234', '443', 'Lethbridge', 'AB', 'VVVVVV'),
+(5, 'Pam', 'Beesly', 'pam.beesly@dunder.ca', '403-111-9221', '342', 'Edmonton', 'AB', 'T1K111'),
+(6, 'Andy', 'Bernard', 'andy.bernard@dunder.ca', '787-0756-21', '123', 'Lethbridge', 'AB', 'ABC456'),
+(7, 'Ryan', 'Howard', 'ryan.howard@dunder.ca', '787-234-9090', '542', 'Lethbridge', 'AB', '444GGG'),
+(8, 'Kelly', 'Kapoor', 'kelly.kapoor@dunder.ca', '1234-4212-932', '1234', 'Calgary', 'AB', '101010'),
+(9, 'Rick', 'Grimes', 'rick.grimes@twd.ca', '234-2345-234', '123', 'Vancouver', 'BC', '442GGF'),
+(10, 'Daryl', 'Dixon', 'daryl.dixon@twd.ca', '123-9999', '444', 'Vancouver', 'BC', '444GGG'),
+(11, 'Michael', 'Scofield', 'michael.scofield@prisonbreak.ca', '234-567-89', '221', 'Lethbridge', 'AB', '787-452-1233');
 #-----------------------------
 # BORROWER
 #-----------------------------
