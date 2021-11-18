@@ -21,6 +21,18 @@ Head part of the pages
 **footer.php**  
 Footer part of the pages
 
+**seeder.sql**  
+Create and insert statements, sample data
+
+**assets/**  
+Images used
+
+**css/**  
+Stylings
+
+**js/**  
+Javascript
+
 **create/**  
 Contains all the pages with forms to create a new record
 
@@ -30,20 +42,23 @@ DB insert handler
 **list/**  
 Contains all the pages to list all records of each entity
 
-**view**
+**view/**  
 Individual pages to view a record of an entity
 
-**edit**
+**edit/**  
 Contains all pages to edit a record in a form
 
-**update**
+**update/**  
 DB update handler
 
-**delete**  
+**delete/**  
 DB delete handler
 
-**ajax**
+**ajax/**  
 Pages whose data will be displayed onto the page via ajax
+
+**docs/**  
+Documentation of the project including proposals, erd, and relational models
 
 
 
